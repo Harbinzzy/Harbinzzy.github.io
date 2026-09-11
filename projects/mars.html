@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MARS is a training-free, multi-level inference acceleration framework for World Action Models.">
+  <title>MARS — Multi-Level Acceleration for WAMs</title>
+  <link rel="canonical" href="https://harbinzzy.github.io/projects/mars.html">
+  <link rel="icon" href="../assets/mars-logo.png">
+  <link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="project-page">
+  <header class="site-header project-header">
+    <a class="site-name" href="../index.html">Zengyuan Zuo</a>
+    <nav class="project-nav" aria-label="Project navigation">
+      <a href="#abstract">Abstract</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#citation">Citation</a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero section-shell">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <img class="mars-logo" src="../assets/mars-logo.png" alt="MARS">
+      <p class="paper-kicker">Training-free inference acceleration for World Action Models</p>
+      <h1>Multi-Level Acceleration via<br>Redundant Computation Skipping for WAMs</h1>
+
+      <div class="authors" aria-label="Authors">
+        <a href="https://scholar.google.com/citations?hl=zh-CN&user=jb-4yJgAAAAJ">Zengyuan Zuo<sup>*</sup></a>
+        <a href="https://github.com/uuuuZYC">Yongchang Zhang<sup>*</sup></a>
+        <a href="https://guangyu-zhao.github.io/">Guangyu Zhao</a>
+        <a href="https://scholar.google.com/citations?user=TSzGqfAAAAAJ&hl=en">Tianze Zhang</a>
+        <a href="https://yiwuzhong.notion.site/homepage">Yiwu Zhong<sup>†</sup></a>
+      </div>
+      <p class="affiliation"><a href="https://github.com/PKU-VaLuE-Lab">VaLuE Lab</a>, Peking University</p>
+      <p class="author-note"><sup>*</sup> Equal contribution &nbsp; <sup>†</sup> Corresponding author</p>
+
+      <div class="hero-actions">
+        <a class="button button-primary" href="https://github.com/Harbinzzy/MARS">
+          <span aria-hidden="true">⌘</span> Code
+        </a>
+        <span class="button button-muted" aria-label="Paper coming soon">
+          <span aria-hidden="true">▤</span> Paper · Coming soon
+        </span>
+      </div>
+
+      <div class="metric-strip" aria-label="Headline results">
+        <div><strong>4.00×</strong><span>LIBERO speedup</span></div>
+        <div><strong>3.94×</strong><span>LIBERO-PRO speedup</span></div>
+        <div><strong>2.10×</strong><span>RoboCasa speedup</span></div>
+        <div><strong>0</strong><span>additional training</span></div>
+      </div>
+    </section>
+
+    <section class="content-section section-shell" id="abstract">
+      <div class="section-heading">
+        <span>01</span>
+        <h2>Abstract</h2>
+      </div>
+      <div class="abstract-copy">
+        <p>World Action Models (WAMs), which jointly predict future world states and robot actions, are emerging as a promising alternative to Vision-Language-Action models. Yet current WAM acceleration methods typically exploit redundancy along only one computational axis, leading to limited speedups or degraded task performance.</p>
+        <p>We introduce <strong>MARS</strong>, a training-free, multi-level inference framework that removes redundant computation across Transformer blocks, diffusion denoising steps, and consecutive action chunks. The three mechanisms integrate into pretrained WAMs in a plug-and-play manner, delivering up to 4.0× speedup on LIBERO/LIBERO-PRO and 2.1× on RoboCasa while preserving task performance.</p>
+      </div>
+    </section>
+
+    <section class="content-section section-shell overview-section" id="method">
+      <div class="section-heading">
+        <span>02</span>
+        <h2>Method overview</h2>
+      </div>
+      <a class="figure-frame" href="../assets/overview.svg" aria-label="Open the MARS overview figure">
+        <img src="../assets/overview.svg" alt="Overview of the three MARS acceleration mechanisms">
+      </a>
+      <p class="figure-caption">MARS targets complementary redundancy within a diffusion step, across denoising steps, and across consecutive action chunks.</p>
+
+      <div class="mechanism-grid">
+        <article class="mechanism-card">
+          <span class="mechanism-number">01</span>
+          <p class="mechanism-level">Within a diffusion step</p>
+          <h3>Redundancy-Aware Attention Skipping</h3>
+          <p>Skips low-impact self- and cross-attention computation while preserving components important for action generation.</p>
+        </article>
+        <article class="mechanism-card">
+          <span class="mechanism-number">02</span>
+          <p class="mechanism-level">Across denoising steps</p>
+          <h3>Action-Aware Diffusion Step Skip</h3>
+          <p>Routes each query between direct one-step generation and residual-reuse multi-step sampling according to motion granularity.</p>
+        </article>
+        <article class="mechanism-card">
+          <span class="mechanism-number">03</span>
+          <p class="mechanism-level">Across action chunks</p>
+          <h3>Shallow-Verify Visual Token Reuse</h3>
+          <p>Uses shallow VAE features to verify temporal consistency before reusing predicted future visual tokens.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section section-shell" id="results">
+      <div class="section-heading">
+        <span>03</span>
+        <h2>Results</h2>
+      </div>
+      <p class="section-lead">End-to-end acceleration on Cosmos Policy, measured with matched three-seed evaluation.</p>
+
+      <div class="results-table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>Benchmark</th>
+              <th>Method</th>
+              <th>Success rate</th>
+              <th>Speedup</th>
+              <th>Latency</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="3"><strong>LIBERO</strong></td>
+              <td>Cosmos Policy</td><td>98.05%</td><td>1.00×</td><td>1.4001 s</td>
+            </tr>
+            <tr class="result-highlight">
+              <td>MARS (Speed)</td><td>97.42%</td><td><strong>4.00×</strong></td><td><strong>0.3498 s</strong></td>
+            </tr>
+            <tr>
+              <td>MARS (Accuracy)</td><td><strong>98.12%</strong></td><td>3.17×</td><td>0.4414 s</td>
+            </tr>
+            <tr class="group-start">
+              <td rowspan="3"><strong>LIBERO-PRO</strong></td>
+              <td>Cosmos Policy</td><td>45.63%</td><td>1.00×</td><td>1.4044 s</td>
+            </tr>
+            <tr class="result-highlight">
+              <td>MARS (Speed)</td><td>45.53%</td><td><strong>3.94×</strong></td><td><strong>0.3564 s</strong></td>
+            </tr>
+            <tr>
+              <td>MARS (Accuracy)</td><td><strong>45.72%</strong></td><td>3.08×</td><td>0.4558 s</td>
+            </tr>
+            <tr class="group-start">
+              <td rowspan="2"><strong>RoboCasa</strong></td>
+              <td>Cosmos Policy</td><td>66.69%</td><td>1.00×</td><td>2.2958 s</td>
+            </tr>
+            <tr class="result-highlight">
+              <td>MARS</td><td><strong>66.94%</strong></td><td><strong>2.10×</strong></td><td><strong>1.0911 s</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="generalization">
+        <div class="generalization-copy">
+          <p class="eyebrow">Cross-backbone generalization</p>
+          <h3>One framework, diverse policies</h3>
+          <p>MARS transfers beyond Cosmos Policy to additional WAM and VLA backbones without retraining.</p>
+        </div>
+        <div class="backbone-metrics">
+          <div><span>Fast-WAM</span><strong>3.17×</strong></div>
+          <div><span>LingBot-VA</span><strong>2.54×</strong></div>
+          <div><span>π0.5</span><strong>1.28×</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section section-shell citation-section" id="citation">
+      <div class="section-heading">
+        <span>04</span>
+        <h2>Citation</h2>
+      </div>
+      <div class="citation-placeholder">
+        <p>Paper and BibTeX will be added upon release.</p>
+        <a href="https://github.com/Harbinzzy/MARS">Follow the repository for updates →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="project-footer">
+    <div>
+      <strong>MARS</strong>
+      <span>Multi-Level Acceleration via Redundant Computation Skipping for WAMs</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/Harbinzzy/MARS">Code</a>
+      <a href="mailto:3565741165@qq.com">Contact</a>
+      <a href="#main-content">Back to top ↑</a>
+    </div>
+  </footer>
+</body>
+</html>
