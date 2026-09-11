@@ -128,7 +128,7 @@ a:focus-visible {
   margin: 0 auto;
   font-family: var(--font-display);
   font-size: clamp(2.3rem, 5.1vw, 4.7rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.045em;
   line-height: 1.04;
 }
@@ -270,7 +270,7 @@ a:focus-visible {
   margin: 0;
   font-family: var(--font-body);
   font-size: clamp(2rem, 4vw, 3.25rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.035em;
   line-height: 1.1;
 }
@@ -355,6 +355,7 @@ a:focus-visible {
 .mechanism-card h3 {
   margin: 0 0 13px;
   font-size: 1.22rem;
+  font-weight: 700;
   line-height: 1.32;
 }
 
@@ -427,7 +428,7 @@ a:focus-visible {
   margin: 0 0 8px;
   font-family: var(--font-display);
   font-size: 1.8rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .generalization-copy p:last-child {
@@ -536,7 +537,7 @@ a:focus-visible {
   margin: 0;
   font-family: var(--font-display);
   font-size: clamp(3rem, 7vw, 6rem);
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: -0.055em;
   line-height: 1;
 }
@@ -580,7 +581,7 @@ a:focus-visible {
   margin: 14px 0 2px;
   font-family: var(--font-display);
   font-size: clamp(2.8rem, 6vw, 5.2rem);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1;
 }
 
