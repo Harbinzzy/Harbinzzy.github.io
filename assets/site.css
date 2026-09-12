@@ -317,6 +317,54 @@ a:focus-visible {
   font-size: 0.9rem;
 }
 
+.pdf-panel {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.pdf-panel > a {
+  display: block;
+  padding: 11px 16px 13px;
+  color: var(--accent-dark);
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.pdf-panel > a:hover {
+  color: var(--ink);
+}
+
+.method-detail-figure {
+  margin-bottom: 48px;
+}
+
+.pdf-embed {
+  width: 100%;
+  display: block;
+  border: 0;
+  background: var(--surface);
+}
+
+.pdf-embed-wide {
+  min-height: 280px;
+  aspect-ratio: 2.98 / 1;
+}
+
+.pdf-embed-portrait {
+  aspect-ratio: 525.6 / 691.2;
+}
+
+.qualitative-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
 .mechanism-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -693,7 +741,8 @@ a:focus-visible {
 
   .abstract-copy,
   .mechanism-grid,
-  .generalization {
+  .generalization,
+  .qualitative-grid {
     grid-template-columns: 1fr;
   }
 
@@ -734,6 +783,10 @@ a:focus-visible {
   .figure-frame {
     padding: 8px;
     border-radius: 12px;
+  }
+
+  .pdf-embed-wide {
+    min-height: 220px;
   }
 
   .backbone-metrics {
