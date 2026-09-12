@@ -69,7 +69,7 @@
     <section class="content-section section-shell overview-section" id="method">
       <div class="section-heading">
         <span>02</span>
-        <h2>Method overview</h2>
+        <h2>Method</h2>
       </div>
       <a class="figure-frame" href="../assets/overview.svg" aria-label="Open the MARS overview figure">
         <img src="../assets/overview.svg" alt="Overview of the three MARS acceleration mechanisms">
@@ -79,7 +79,7 @@
       <div class="mechanism-grid">
         <article class="mechanism-card">
           <span class="mechanism-number">01</span>
-          <p class="mechanism-level">Within a diffusion step</p>
+          <p class="mechanism-level">Diffusion steps</p>
           <h3>Redundancy-Aware Attention Skipping</h3>
           <p>Skips low-impact self- and cross-attention computation while preserving components important for action generation.</p>
         </article>
@@ -105,58 +105,130 @@
       </div>
       <p class="section-lead">End-to-end acceleration on Cosmos Policy, measured with matched three-seed evaluation.</p>
 
-      <div class="results-table-wrap">
-        <table class="results-table">
-          <thead>
-            <tr>
-              <th>Benchmark</th>
-              <th>Method</th>
-              <th>Success rate</th>
-              <th>Speedup</th>
-              <th>Latency</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td rowspan="3"><strong>LIBERO</strong></td>
-              <td>Cosmos Policy</td><td>98.05%</td><td>1.00×</td><td>1.4001 s</td>
-            </tr>
-            <tr class="result-highlight">
-              <td>MARS (Speed)</td><td>97.42%</td><td><strong>4.00×</strong></td><td><strong>0.3498 s</strong></td>
-            </tr>
-            <tr>
-              <td>MARS (Accuracy)</td><td><strong>98.12%</strong></td><td>3.17×</td><td>0.4414 s</td>
-            </tr>
-            <tr class="group-start">
-              <td rowspan="3"><strong>LIBERO-PRO</strong></td>
-              <td>Cosmos Policy</td><td>45.63%</td><td>1.00×</td><td>1.4044 s</td>
-            </tr>
-            <tr class="result-highlight">
-              <td>MARS (Speed)</td><td>45.53%</td><td><strong>3.94×</strong></td><td><strong>0.3564 s</strong></td>
-            </tr>
-            <tr>
-              <td>MARS (Accuracy)</td><td><strong>45.72%</strong></td><td>3.08×</td><td>0.4558 s</td>
-            </tr>
-            <tr class="group-start">
-              <td rowspan="2"><strong>RoboCasa</strong></td>
-              <td>Cosmos Policy</td><td>66.69%</td><td>1.00×</td><td>2.2958 s</td>
-            </tr>
-            <tr class="result-highlight">
-              <td>MARS</td><td><strong>66.94%</strong></td><td><strong>2.10×</strong></td><td><strong>1.0911 s</strong></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="benchmark-results">
+        <section class="benchmark-table-block" aria-labelledby="libero-results-title">
+          <h3 id="libero-results-title">LIBERO</h3>
+          <div class="results-table-wrap">
+            <table class="results-table results-table-wide">
+              <thead>
+                <tr>
+                  <th rowspan="2" scope="col">Method</th>
+                  <th colspan="4" scope="colgroup">Success Rate (%, ↑) / Speedup (↑)</th>
+                  <th rowspan="2" scope="col">Success<br>Rate (↑)</th>
+                  <th rowspan="2" scope="col">Speedup (↑)</th>
+                  <th rowspan="2" scope="col">Latency (↓)</th>
+                  <th rowspan="2" scope="col">FLOPs (↓)</th>
+                </tr>
+                <tr>
+                  <th scope="col">Goal</th>
+                  <th scope="col">Object</th>
+                  <th scope="col">Spatial</th>
+                  <th scope="col">Long</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Cosmos Policy</th><td>98.20 / 1.00</td><td>99.87 / 1.00</td><td>97.47 / 1.00</td><td>96.67 / 1.00</td><td>98.05%</td><td>1.00×</td><td>1.4001 s</td><td>100.00%</td>
+                </tr>
+                <tr>
+                  <th scope="row">+ DiCache</th><td>98.07 / 1.70</td><td>99.87 / 1.66</td><td>97.80 / 1.67</td><td>97.27 / 1.72</td><td>98.25%</td><td>1.69×</td><td>0.8273 s</td><td>48.12%</td>
+                </tr>
+                <tr>
+                  <th scope="row">+ C<sup>3</sup>Cache<sup>*</sup></th><td>97.80 / 2.19</td><td>99.00 / 2.16</td><td>97.53 / 2.25</td><td>94.47 / 2.30</td><td>97.20%</td><td>2.24×</td><td>0.6256 s</td><td>33.18%</td>
+                </tr>
+                <tr>
+                  <th scope="row">+ X-Cache<sup>*</sup></th><td>97.87 / 1.11</td><td>99.67 / 1.17</td><td>97.47 / 1.12</td><td>97.00 / 1.21</td><td>98.00%</td><td>1.17×</td><td>1.2017 s</td><td>80.20%</td>
+                </tr>
+                <tr class="result-highlight">
+                  <th scope="row"><strong>+ Ours (Speed)</strong></th><td>96.73 / 3.89</td><td>99.07 / 4.08</td><td>97.60 / 3.87</td><td>96.27 / 4.07</td><td>97.42%</td><td><strong>4.00×</strong></td><td><strong>0.3498 s</strong></td><td><strong>18.39%</strong></td>
+                </tr>
+                <tr class="result-highlight">
+                  <th scope="row"><strong>+ Ours (Acc.)</strong></th><td>98.47 / 3.06</td><td>99.60 / 3.29</td><td>97.80 / 3.10</td><td>96.60 / 3.19</td><td>98.12%</td><td>3.17×</td><td>0.4414 s</td><td>19.19%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="benchmark-table-block" aria-labelledby="liberopro-results-title">
+          <h3 id="liberopro-results-title">LIBERO-PRO</h3>
+          <div class="results-table-wrap">
+            <table class="results-table results-table-wide">
+              <thead>
+                <tr>
+                  <th rowspan="2" scope="col">Method</th>
+                  <th colspan="4" scope="colgroup">Success Rate (%, ↑) / Speedup (↑)</th>
+                  <th rowspan="2" scope="col">Success<br>Rate (↑)</th>
+                  <th rowspan="2" scope="col">Speedup (↑)</th>
+                  <th rowspan="2" scope="col">Latency (↓)</th>
+                  <th rowspan="2" scope="col">FLOPs (↓)</th>
+                </tr>
+                <tr>
+                  <th scope="col">Goal</th>
+                  <th scope="col">Object</th>
+                  <th scope="col">Spatial</th>
+                  <th scope="col">Long</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Cosmos Policy</th><td>43.67 / 1.00</td><td>46.13 / 1.00</td><td>47.40 / 1.00</td><td>45.33 / 1.00</td><td>45.63%</td><td>1.00×</td><td>1.4044 s</td><td>100.00%</td>
+                </tr>
+                <tr>
+                  <th scope="row">+ DiCache</th><td>44.13 / 1.67</td><td>46.27 / 1.66</td><td>47.73 / 1.63</td><td>45.07 / 1.73</td><td>45.80%</td><td>1.68×</td><td>0.8347 s</td><td>50.32%</td>
+                </tr>
+                <tr>
+                  <th scope="row">+ C<sup>3</sup>Cache<sup>*</sup></th><td>42.80 / 2.22</td><td>45.53 / 2.20</td><td>47.53 / 2.28</td><td>42.60 / 2.30</td><td>44.62%</td><td>2.26×</td><td>0.6222 s</td><td>32.86%</td>
+                </tr>
+                <tr>
+                  <th scope="row">+ X-Cache<sup>*</sup></th><td>43.73 / 1.17</td><td>46.20 / 1.22</td><td>47.80 / 1.17</td><td>44.33 / 1.26</td><td>45.52%</td><td>1.22×</td><td>1.1549 s</td><td>75.55%</td>
+                </tr>
+                <tr class="result-highlight">
+                  <th scope="row"><strong>+ Ours (Speed)</strong></th><td>44.20 / 3.91</td><td>45.67 / 3.86</td><td>47.33 / 3.96</td><td>44.93 / 3.99</td><td>45.53%</td><td><strong>3.94×</strong></td><td><strong>0.3564 s</strong></td><td><strong>18.80%</strong></td>
+                </tr>
+                <tr class="result-highlight">
+                  <th scope="row"><strong>+ Ours (Acc.)</strong></th><td>43.67 / 3.05</td><td>47.00 / 3.08</td><td>47.60 / 3.06</td><td>44.60 / 3.11</td><td>45.72%</td><td>3.08×</td><td>0.4558 s</td><td>19.05%</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="benchmark-table-block" aria-labelledby="robocasa-results-title">
+          <h3 id="robocasa-results-title">RoboCasa</h3>
+          <div class="results-table-wrap">
+            <table class="results-table results-table-compact">
+              <thead>
+                <tr>
+                  <th scope="col">Method</th>
+                  <th scope="col">S.R. (↑)</th>
+                  <th scope="col">Speedup (↑)</th>
+                  <th scope="col">Latency (↓)</th>
+                  <th scope="col">FLOPs (↓)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Cosmos Policy</th><td>66.69%</td><td>1.00×</td><td>2.2958 s</td><td>100.00%</td></tr>
+                <tr><th scope="row">+ DiCache</th><td>66.47%</td><td>1.50×</td><td>1.5305 s</td><td>49.99%</td></tr>
+                <tr><th scope="row">+ C<sup>3</sup>Cache<sup>*</sup></th><td>65.00%</td><td>1.81×</td><td>1.2653 s</td><td>33.64%</td></tr>
+                <tr><th scope="row">+ X-Cache<sup>*</sup></th><td>66.37%</td><td>1.20×</td><td>1.9202 s</td><td>72.86%</td></tr>
+                <tr><th scope="row">+ Falcon</th><td>66.47%</td><td>1.21×</td><td>1.8968 s</td><td>74.56%</td></tr>
+                <tr class="result-highlight"><th scope="row"><strong>+ Ours</strong></th><td><strong>66.94%</strong></td><td><strong>2.10×</strong></td><td><strong>1.0911 s</strong></td><td><strong>22.50%</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
       </div>
 
       <div class="generalization">
         <div class="generalization-copy">
-          <p class="eyebrow">Cross-backbone generalization</p>
+          <p class="eyebrow">With Different Base Models</p>
           <h3>One framework, diverse policies</h3>
           <p>MARS transfers beyond Cosmos Policy to additional WAM and VLA backbones without retraining.</p>
         </div>
         <div class="backbone-metrics">
           <div><span>Fast-WAM</span><strong>3.17×</strong></div>
-          <div><span>LingBot-VA</span><strong>2.54×</strong></div>
+          <div><span>LingBot-VA</span><strong>2.88×</strong></div>
           <div><span>π0.5</span><strong>1.28×</strong></div>
         </div>
       </div>
