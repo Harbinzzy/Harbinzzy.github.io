@@ -280,14 +280,13 @@ a:focus-visible {
 }
 
 .abstract-copy {
-  max-width: 920px;
-  margin-left: auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 38px;
+  max-width: none;
+  margin: 0;
+  display: block;
   color: #33445a;
   font-size: 1.05rem;
   line-height: 1.82;
+  text-align: left;
 }
 
 .abstract-copy p {
