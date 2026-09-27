@@ -283,12 +283,17 @@ a:focus-visible {
   width: min(1480px, calc(100vw - 40px));
 }
 
+.abstract-section .section-heading span {
+  flex: 0 0 20px;
+}
+
 .abstract-copy {
   max-width: none;
   margin: 0;
+  padding-left: 36px;
   display: block;
   color: #33445a;
-  font-size: 0.98rem;
+  font-size: 1rem;
   line-height: 1.72;
   text-align: left;
 }
