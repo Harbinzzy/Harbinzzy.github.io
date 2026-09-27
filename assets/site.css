@@ -279,10 +279,6 @@ a:focus-visible {
   line-height: 1.1;
 }
 
-.abstract-section {
-  width: min(1480px, calc(100vw - 40px));
-}
-
 .abstract-section .section-heading span {
   flex: 0 0 20px;
 }
