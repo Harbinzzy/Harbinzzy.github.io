@@ -81,25 +81,31 @@
       <div class="figure-frame motivation-figure">
         <img src="../assets/insight.png" alt="Diagnostics of Transformer-, diffusion-, and action-level redundancy in WAM inference" loading="lazy">
       </div>
-      <p class="figure-caption"><strong>Redundancy across multiple levels of WAM inference.</strong> Diagnostics are measured in the LIBERO simulation environment.</p>
+      <p class="figure-caption"><strong>Redundancy across multiple levels of WAM inference.</strong> Diagnostics are measured in the LIBERO simulation.</p>
 
       <div class="motivation-grid">
         <article class="motivation-card">
-          <span class="motivation-number">(a)</span>
-          <p class="motivation-level">Transformer-Level Redundancy</p>
-          <h3>Non-Uniform Attention</h3>
+          <div class="motivation-title">
+            <span class="motivation-number">(a)</span>
+            <h3>Transformer-Level Redundancy</h3>
+          </div>
+          <p class="motivation-concept">Non-Uniform Attention</p>
           <p>Many cross-attention blocks and self-attention heads induce only small output changes, while a smaller subset remains influential. This non-uniform importance motivates selective component-wise attention skipping.</p>
         </article>
         <article class="motivation-card">
-          <span class="motivation-number">(b)</span>
-          <p class="motivation-level">Diffusion-Level Redundancy</p>
-          <h3>Residual Stability</h3>
+          <div class="motivation-title">
+            <span class="motivation-number">(b)</span>
+            <h3>Diffusion-Level Redundancy</h3>
+          </div>
+          <p class="motivation-concept">Residual Stability</p>
           <p>Diffusion step inputs evolve substantially across denoising steps, whereas the predicted outputs and DiT residuals remain comparatively stable. This motivates direct one-step prediction and residual-reuse multi-step sampling.</p>
         </article>
         <article class="motivation-card">
-          <span class="motivation-number">(c)</span>
-          <p class="motivation-level">Action-Level Redundancy</p>
-          <h3>Speculative Visual Dynamics</h3>
+          <div class="motivation-title">
+            <span class="motivation-number">(c)</span>
+            <h3>Action-Level Redundancy</h3>
+          </div>
+          <p class="motivation-concept">Speculative Visual Dynamics</p>
           <p>Spatial alignment between predicted latent changes and actual shallow-feature changes reveals cross-chunk visual redundancy and provides a lightweight signal for safe visual-token reuse.</p>
         </article>
       </div>

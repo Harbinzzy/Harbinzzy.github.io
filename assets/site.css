@@ -342,7 +342,6 @@ a:focus-visible {
 
 .motivation-card {
   --analysis-accent: var(--accent);
-  --analysis-soft: rgba(19, 118, 210, 0.09);
   padding: 26px;
   border: 1px solid var(--line);
   border-radius: 18px;
@@ -351,12 +350,17 @@ a:focus-visible {
 
 .motivation-card:nth-child(2) {
   --analysis-accent: #df7824;
-  --analysis-soft: rgba(223, 120, 36, 0.1);
 }
 
 .motivation-card:nth-child(3) {
   --analysis-accent: #318844;
-  --analysis-soft: rgba(49, 136, 68, 0.1);
+}
+
+.motivation-title {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .motivation-number {
@@ -366,22 +370,9 @@ a:focus-visible {
   letter-spacing: 0.1em;
 }
 
-.motivation-level {
-  width: fit-content;
-  margin: 14px 0 8px;
-  padding: 5px 10px;
-  color: var(--analysis-accent);
-  border: 1px solid color-mix(in srgb, var(--analysis-accent) 28%, transparent);
-  border-radius: 999px;
-  background: var(--analysis-soft);
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0.045em;
-  text-transform: uppercase;
-}
-
 .motivation-card h3 {
-  margin: 0 0 12px;
+  margin: 0;
+  color: var(--ink);
   font-size: 1.12rem;
   line-height: 1.35;
 }
@@ -390,6 +381,14 @@ a:focus-visible {
   margin: 0;
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+.motivation-card .motivation-concept {
+  margin: 0 0 10px;
+  color: var(--analysis-accent);
+  font-size: 0.84rem;
+  font-weight: 800;
+  letter-spacing: 0.025em;
 }
 
 .qualitative-grid {
