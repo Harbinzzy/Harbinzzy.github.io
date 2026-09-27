@@ -321,6 +321,42 @@ a:focus-visible {
   margin-bottom: 48px;
 }
 
+.motivation-figure {
+  padding: 14px;
+}
+
+.motivation-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.motivation-card {
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+}
+
+.motivation-number {
+  color: var(--accent);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+}
+
+.motivation-card h3 {
+  margin: 10px 0 12px;
+  font-size: 1.12rem;
+  line-height: 1.35;
+}
+
+.motivation-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .qualitative-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -448,6 +484,7 @@ a:focus-visible {
   border-bottom: 0;
 }
 
+.results-table .group-start th,
 .results-table .group-start td {
   border-top: 2px solid #c8d6e6;
 }
@@ -506,6 +543,16 @@ a:focus-visible {
 .backbone-metrics strong {
   color: #54d7f3;
   font-size: 1.5rem;
+}
+
+.backbone-results {
+  margin-top: 34px;
+}
+
+.table-note {
+  margin: -5px 0 14px;
+  color: var(--muted);
+  font-size: 0.88rem;
 }
 
 .citation-placeholder {
@@ -702,6 +749,7 @@ a:focus-visible {
   }
 
   .abstract-copy,
+  .motivation-grid,
   .mechanism-grid,
   .generalization,
   .qualitative-grid {

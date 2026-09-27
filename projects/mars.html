@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="MARS is a training-free, multi-level inference acceleration framework for World Action Models.">
-  <title>MARS — Multi-Level Acceleration for WAMs</title>
+  <meta name="description" content="MARS: Systematic Multi-Level Acceleration for World Action Models.">
+  <title>MARS — Systematic Multi-Level Acceleration for World Action Models</title>
   <link rel="canonical" href="https://harbinzzy.github.io/projects/mars.html">
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@500;700&amp;family=Noto+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="icon" href="../assets/mars-logo.png">
@@ -15,6 +15,7 @@
     <a class="site-name" href="../index.html">Zengyuan Zuo</a>
     <nav class="project-nav" aria-label="Project navigation">
       <a href="#abstract">Abstract</a>
+      <a href="#motivation">Motivation</a>
       <a href="#method">Method</a>
       <a href="#results">Results</a>
       <a href="#citation">Citation</a>
@@ -26,20 +27,26 @@
       <div class="hero-glow" aria-hidden="true"></div>
       <img class="mars-logo" src="../assets/mars-logo.png" alt="MARS">
       <p class="paper-kicker">Training-free inference acceleration for World Action Models</p>
-      <h1>Multi-Level Acceleration via<br>Redundant Computation Skipping for WAMs</h1>
+      <h1>Systematic Multi-Level Acceleration<br>for World Action Models</h1>
 
       <div class="authors" aria-label="Authors">
-        <a href="https://scholar.google.com/citations?hl=zh-CN&user=jb-4yJgAAAAJ">Zengyuan Zuo<sup>*</sup></a>
-        <a href="https://github.com/uuuuZYC">Yongchang Zhang<sup>*</sup></a>
-        <a href="https://guangyu-zhao.github.io/">Guangyu Zhao</a>
-        <a href="https://scholar.google.com/citations?user=TSzGqfAAAAAJ&hl=en">Tianze Zhang</a>
-        <a href="https://yiwuzhong.notion.site/homepage">Yiwu Zhong<sup>†</sup></a>
+        <a href="https://scholar.google.com/citations?hl=zh-CN&amp;user=jb-4yJgAAAAJ">Zengyuan Zuo<sup>1,*</sup></a>
+        <a href="https://github.com/uuuuZYC">Yongchang Zhang<sup>1,*</sup></a>
+        <a href="https://guangyu-zhao.github.io/">Guangyu Zhao<sup>1</sup></a>
+        <a href="https://scholar.google.com/citations?user=TSzGqfAAAAAJ&amp;hl=en">Tianze Zhang<sup>1</sup></a>
+        <a href="https://scholar.google.com/citations?user=Y3SBBWMAAAAJ&amp;hl=en">Biao Wu<sup>2</sup></a>
+        <a href="https://mengfn.github.io/">Meng Fang<sup>3</sup></a>
+        <a href="https://yiwuzhong.notion.site/homepage">Yiwu Zhong<sup>1,†</sup></a>
       </div>
-      <p class="affiliation"><a href="https://github.com/PKU-VaLuE-Lab">VaLuE Lab</a>, Peking University</p>
+      <p class="affiliation">
+        <sup>1</sup><a href="https://github.com/PKU-VaLuE-Lab">VaLuE Lab</a>, Peking University
+        <span aria-hidden="true"> · </span><sup>2</sup>University of Technology Sydney
+        <span aria-hidden="true"> · </span><sup>3</sup>University of Liverpool
+      </p>
       <p class="author-note"><sup>*</sup> Equal contribution &nbsp; <sup>†</sup> Corresponding author</p>
 
       <div class="hero-actions">
-        <a class="button button-primary" href="https://github.com/Harbinzzy/MARS">
+        <a class="button button-primary" href="https://github.com/PKU-VaLuE-Lab/MARS">
           <span aria-hidden="true">⌘</span> Code
         </a>
         <span class="button button-muted" aria-label="Paper coming soon">
@@ -61,20 +68,50 @@
         <h2>Abstract</h2>
       </div>
       <div class="abstract-copy">
-        <p>World Action Models (WAMs), which jointly predict future world states and robot actions, are emerging as a promising alternative to Vision-Language-Action models. Yet current WAM acceleration methods typically exploit redundancy along only one computational axis, leading to limited speedups or degraded task performance.</p>
-        <p>We introduce <strong>MARS</strong>, a training-free, multi-level inference framework that removes redundant computation across Transformer blocks, diffusion denoising steps, and consecutive action chunks. The three mechanisms integrate into pretrained WAMs in a plug-and-play manner, delivering up to 4.0× speedup on LIBERO/LIBERO-PRO and 2.1× on RoboCasa while preserving task performance.</p>
+        <p>World Action Models (WAMs) are emerging as a promising alternative to Vision-Language-Action (VLA) models. Existing VLA acceleration methods primarily reduce VLM computation and are not directly applicable to diffusion-based WAMs. Moreover, WAM acceleration methods typically target redundancy along only a single computational axis, overlooking substantial redundancy across the full pipeline, resulting in either limited speedups or drops in success rate.</p>
+        <p>To address these limitations, we propose <strong>MARS</strong>, a training-free multi-level acceleration framework that systematically exploits distinct sources of redundancy at three computational levels: (1) across Transformer blocks, we selectively skip redundant attention components; (2) across diffusion denoising steps, we perform action-aware routing to adaptively skip diffusion steps; (3) across consecutive action chunks, we reuse future visual tokens, thereby skipping the VAE encoding. These mechanisms are synergistically integrated in a plug-and-play manner. Extensive experiments across multiple benchmarks and base models demonstrate that our method achieves a superior efficiency-performance trade-off, delivering up to a 4.00×/3.94× speedup in LIBERO/LIBERO-PRO, 2.10× in RoboCasa, and consistent speedups on real-world tasks, while maintaining comparable success rates.</p>
+      </div>
+    </section>
+
+    <section class="content-section section-shell motivation-section" id="motivation">
+      <div class="section-heading">
+        <span>02</span>
+        <h2>Motivation</h2>
+      </div>
+      <p class="section-lead">Profiling the WAM inference pipeline reveals structured redundancy at three distinct computational levels.</p>
+      <div class="figure-frame motivation-figure">
+        <img src="../assets/insight.svg" alt="Diagnostics of Transformer-, diffusion-, and action-level redundancy in WAM inference" loading="lazy">
+      </div>
+      <p class="figure-caption"><strong>Redundancy across multiple levels of WAM inference.</strong> Diagnostics are measured in the LIBERO simulation environment.</p>
+
+      <div class="motivation-grid">
+        <article class="motivation-card">
+          <span class="motivation-number">01</span>
+          <h3>Transformer-Level Redundancy</h3>
+          <p>Many cross-attention blocks and self-attention heads induce only small output changes, while a smaller subset remains influential. This non-uniform importance motivates selective component-wise attention skipping.</p>
+        </article>
+        <article class="motivation-card">
+          <span class="motivation-number">02</span>
+          <h3>Diffusion-Level Redundancy</h3>
+          <p>Diffusion step inputs evolve substantially across denoising steps, whereas the predicted outputs and DiT residuals remain comparatively stable. This motivates direct one-step prediction and residual-reuse multi-step sampling.</p>
+        </article>
+        <article class="motivation-card">
+          <span class="motivation-number">03</span>
+          <h3>Action-Level Redundancy</h3>
+          <p>Spatial alignment between predicted latent changes and actual shallow-feature changes reveals cross-chunk visual redundancy and provides a lightweight signal for safe visual-token reuse.</p>
+        </article>
       </div>
     </section>
 
     <section class="content-section section-shell overview-section" id="method">
       <div class="section-heading">
-        <span>02</span>
+        <span>03</span>
         <h2>Method</h2>
       </div>
       <div class="figure-frame">
         <img src="../assets/overview.svg" alt="Overview of the three MARS acceleration mechanisms">
       </div>
-      <p class="figure-caption">MARS targets complementary redundancy within diffusion steps, across denoising steps, and across consecutive action chunks.</p>
+      <p class="figure-caption">MARS targets redundancy within diffusion steps, across denoising steps, and across consecutive action chunks.</p>
 
       <div class="figure-frame method-detail-figure">
         <img src="../assets/methods.svg" alt="Detailed illustration of the MARS method" loading="lazy">
@@ -90,7 +127,7 @@
         <article class="mechanism-card">
           <span class="mechanism-number">02</span>
           <p class="mechanism-level">Across denoising steps</p>
-          <h3>Action-Aware Diffusion Step Skip</h3>
+          <h3>Action-Aware Diffusion Step Skipping</h3>
           <p>Routes each query between direct one-step generation and residual-reuse multi-step sampling according to motion granularity.</p>
         </article>
         <article class="mechanism-card">
@@ -104,7 +141,7 @@
 
     <section class="content-section section-shell" id="results">
       <div class="section-heading">
-        <span>03</span>
+        <span>04</span>
         <h2>Quantitative Results</h2>
       </div>
       <p class="section-lead">End-to-end acceleration on Cosmos Policy, measured with matched three-seed evaluation.</p>
@@ -236,11 +273,43 @@
           <div><span>π0.5</span><strong>1.28×</strong></div>
         </div>
       </div>
+
+      <section class="benchmark-table-block backbone-results" aria-labelledby="backbone-results-title">
+        <h3 id="backbone-results-title">Results with Different Base Models</h3>
+        <p class="table-note">LingBot-VA is evaluated only on Long because only its Long checkpoint is publicly available.</p>
+        <div class="results-table-wrap">
+          <table class="results-table results-table-wide">
+            <thead>
+              <tr>
+                <th rowspan="2" scope="col">Method</th>
+                <th colspan="4" scope="colgroup">Success Rate (%, ↑) / Speedup (↑)</th>
+                <th rowspan="2" scope="col">Success Rate (↑)</th>
+                <th rowspan="2" scope="col">Speedup (↑)</th>
+                <th rowspan="2" scope="col">Latency (↓)</th>
+              </tr>
+              <tr>
+                <th scope="col">Goal</th>
+                <th scope="col">Object</th>
+                <th scope="col">Spatial</th>
+                <th scope="col">Long</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Fast-WAM</th><td>95.87 / 1.00</td><td>99.40 / 1.00</td><td>97.13 / 1.00</td><td>93.93 / 1.00</td><td><strong>96.58%</strong></td><td>1.00×</td><td>0.5365 s</td></tr>
+              <tr class="result-highlight"><th scope="row"><strong>+ Ours</strong></th><td>96.07 / 3.43</td><td>99.00 / 3.25</td><td>96.93 / 3.43</td><td>93.20 / 2.93</td><td>96.30%</td><td><strong>3.17×</strong></td><td><strong>0.1693 s</strong></td></tr>
+              <tr class="group-start"><th scope="row">LingBot-VA</th><td>—</td><td>—</td><td>—</td><td>97.40 / 1.00</td><td>97.40%</td><td>1.00×</td><td>13.4105 s</td></tr>
+              <tr class="result-highlight"><th scope="row"><strong>+ Ours</strong></th><td>—</td><td>—</td><td>—</td><td>98.13 / 2.88</td><td><strong>98.13%</strong></td><td><strong>2.88×</strong></td><td><strong>4.6558 s</strong></td></tr>
+              <tr class="group-start"><th scope="row">π<sub>0.5</sub></th><td>97.80 / 1.00</td><td>98.67 / 1.00</td><td>98.40 / 1.00</td><td>92.93 / 1.00</td><td><strong>96.95%</strong></td><td>1.00×</td><td>0.1462 s</td></tr>
+              <tr class="result-highlight"><th scope="row"><strong>+ Ours</strong></th><td>97.87 / 1.29</td><td>99.07 / 1.30</td><td>98.47 / 1.33</td><td>92.27 / 1.24</td><td>96.92%</td><td><strong>1.28×</strong></td><td><strong>0.1145 s</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </section>
 
     <section class="content-section section-shell" id="qualitative-results">
       <div class="section-heading">
-        <span>04</span>
+        <span>05</span>
         <h2>Qualitative Results</h2>
       </div>
       <div class="qualitative-grid">
@@ -255,12 +324,12 @@
 
     <section class="content-section section-shell citation-section" id="citation">
       <div class="section-heading">
-        <span>05</span>
+        <span>06</span>
         <h2>Citation</h2>
       </div>
       <div class="citation-placeholder">
         <p>Paper and BibTeX will be added upon release.</p>
-        <a href="https://github.com/Harbinzzy/MARS">Follow the repository for updates →</a>
+        <a href="https://github.com/PKU-VaLuE-Lab/MARS">Follow the repository for updates →</a>
       </div>
     </section>
   </main>
@@ -268,10 +337,10 @@
   <footer class="project-footer">
     <div>
       <strong>MARS</strong>
-      <span>Multi-Level Acceleration via Redundant Computation Skipping for WAMs</span>
+      <span>Systematic Multi-Level Acceleration for World Action Models</span>
     </div>
     <div class="footer-links">
-      <a href="https://github.com/Harbinzzy/MARS">Code</a>
+      <a href="https://github.com/PKU-VaLuE-Lab/MARS">Code</a>
       <a href="mailto:3565741165@qq.com">Contact</a>
       <a href="#main-content">Back to top ↑</a>
     </div>
