@@ -325,6 +325,11 @@ a:focus-visible {
   font-size: 0.9rem;
 }
 
+.method-caption {
+  max-width: 100%;
+  white-space: nowrap;
+}
+
 .method-detail-figure {
   margin-bottom: 48px;
 }
@@ -783,6 +788,10 @@ a:focus-visible {
   .generalization,
   .qualitative-grid {
     grid-template-columns: 1fr;
+  }
+
+  .method-caption {
+    white-space: normal;
   }
 
   .mechanism-card {
