@@ -341,19 +341,10 @@ a:focus-visible {
 }
 
 .motivation-card {
-  --analysis-accent: var(--accent);
   padding: 26px;
   border: 1px solid var(--line);
   border-radius: 18px;
   background: var(--surface);
-}
-
-.motivation-card:nth-child(2) {
-  --analysis-accent: #df7824;
-}
-
-.motivation-card:nth-child(3) {
-  --analysis-accent: #318844;
 }
 
 .motivation-title {
@@ -364,7 +355,7 @@ a:focus-visible {
 }
 
 .motivation-number {
-  color: var(--analysis-accent);
+  color: var(--ink);
   font-size: 0.88rem;
   font-weight: 850;
   letter-spacing: 0.1em;
@@ -385,9 +376,9 @@ a:focus-visible {
 
 .motivation-card .motivation-concept {
   margin: 0 0 10px;
-  color: var(--analysis-accent);
-  font-size: 0.84rem;
-  font-weight: 800;
+  color: var(--accent-dark);
+  font-size: 0.88rem;
+  font-weight: 900;
   letter-spacing: 0.025em;
 }
 
