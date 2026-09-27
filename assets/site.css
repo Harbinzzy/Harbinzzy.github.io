@@ -279,13 +279,17 @@ a:focus-visible {
   line-height: 1.1;
 }
 
+.abstract-section {
+  width: min(1480px, calc(100vw - 40px));
+}
+
 .abstract-copy {
   max-width: none;
   margin: 0;
   display: block;
   color: #33445a;
-  font-size: 1.05rem;
-  line-height: 1.82;
+  font-size: 0.98rem;
+  line-height: 1.72;
   text-align: left;
 }
 
