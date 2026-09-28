@@ -319,6 +319,25 @@ a:focus-visible {
   white-space: nowrap;
 }
 
+.tradeoff-chart-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tradeoff-chart-image {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tradeoff-chart-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .tradeoff-legend {
   position: absolute;
   top: 9px;
