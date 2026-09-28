@@ -254,10 +254,6 @@ a:focus-visible {
 .tradeoff-showcase {
   margin: 0 auto 76px;
   padding: 34px;
-  display: grid;
-  grid-template-columns: minmax(230px, 0.72fr) minmax(0, 1.8fr);
-  gap: 34px;
-  align-items: center;
   border: 1px solid #cfe0ef;
   border-radius: 24px;
   background:
@@ -266,12 +262,21 @@ a:focus-visible {
   box-shadow: 0 20px 58px rgba(18, 77, 145, 0.11);
 }
 
+.tradeoff-intro {
+  margin-bottom: 26px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.85fr);
+  gap: 22px 34px;
+  align-items: end;
+}
+
 .tradeoff-intro .eyebrow {
+  grid-column: 1 / -1;
   margin-bottom: 10px;
 }
 
 .tradeoff-intro h2 {
-  margin: 0 0 13px;
+  margin: 0;
   font-family: var(--font-display);
   font-size: clamp(1.65rem, 2.8vw, 2.55rem);
   font-weight: 700;
@@ -286,6 +291,14 @@ a:focus-visible {
   line-height: 1.65;
 }
 
+.tradeoff-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.28fr) minmax(380px, 0.92fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.tradeoff-chart-card,
 .tradeoff-panel {
   padding: 18px;
   border: 1px solid rgba(159, 187, 214, 0.62);
@@ -293,10 +306,243 @@ a:focus-visible {
   background: rgba(255, 255, 255, 0.82);
 }
 
+.tradeoff-chart-header {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  font-size: 0.82rem;
+}
+
+.tradeoff-chart-header > strong {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+}
+
+.tradeoff-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px 13px;
+  color: var(--muted);
+  font-size: 0.67rem;
+  font-weight: 750;
+}
+
+.tradeoff-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.legend-dot {
+  width: 9px;
+  height: 9px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.legend-dot-baseline {
+  background: #83878b;
+}
+
+.legend-dot-dicache { background: #aa5f48; }
+.legend-dot-c3 { background: #8860bd; }
+.legend-dot-xcache { background: #d85eb0; }
+.legend-dot-ours-1 { background: #65b96e; }
+.legend-dot-ours-2 { background: #4aaa62; }
+.legend-dot-ours-3 { background: #299c59; }
+.legend-dot-ours-4 { background: #168849; }
+.legend-dot-ours-5 { background: #057442; }
+
+.legend-ours .legend-dot + .legend-dot {
+  margin-left: -2px;
+}
+
+.tradeoff-chart {
+  height: 310px;
+  position: relative;
+  padding: 10px 8px 54px 52px;
+}
+
+.chart-y-title,
+.chart-x-title {
+  position: absolute;
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.chart-y-title {
+  left: -14px;
+  top: 47%;
+  transform: translateY(-50%) rotate(-90deg);
+}
+
+.chart-x-title {
+  left: calc(50% + 26px);
+  bottom: 0;
+  transform: translateX(-50%);
+}
+
+.chart-y-ticks {
+  position: absolute;
+  top: 4px;
+  bottom: 50px;
+  left: 0;
+  width: 43px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+.chart-x-ticks {
+  position: absolute;
+  right: 8px;
+  bottom: 28px;
+  left: 52px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+.chart-plot {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  bottom: 50px;
+  left: 52px;
+  overflow: hidden;
+  border-bottom: 1.5px solid #88939f;
+  border-left: 1.5px solid #88939f;
+  background-image:
+    linear-gradient(to right, rgba(127, 146, 164, 0.14) 1px, transparent 1px),
+    linear-gradient(to top, rgba(127, 146, 164, 0.14) 1px, transparent 1px);
+  background-size: 16.666% 16.666%;
+}
+
+.chart-point {
+  position: absolute;
+  z-index: 3;
+  width: 19px;
+  height: 19px;
+  display: block;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  transform: translate(-50%, 50%);
+  box-shadow: 0 0 0 6px rgba(87, 101, 114, 0.13);
+}
+
+.point-ours {
+  background: #238b4b;
+  box-shadow: 0 0 0 5px rgba(57, 166, 86, 0.17);
+}
+
+.point-ours-1 { left: 1%; bottom: 32.3%; background: #057442; }
+.point-ours-2 { left: 4.1%; bottom: 37.7%; background: #168849; }
+.point-ours-3 { left: 4.7%; bottom: 51%; background: #299c59; }
+.point-ours-4 { left: 12.8%; bottom: 59.3%; background: #65b96e; }
+.point-ours-5 { left: 13%; bottom: 57.3%; background: #4aaa62; }
+
+.point-other {
+  width: 23px;
+  height: 23px;
+}
+
+.point-c3 {
+  left: 26.8%;
+  bottom: 20.7%;
+  background: #8860bd;
+  box-shadow: 0 0 0 7px rgba(136, 96, 189, 0.15);
+}
+
+.point-dicache {
+  left: 44.6%;
+  bottom: 60%;
+  background: #aa5f48;
+  box-shadow: 0 0 0 8px rgba(170, 95, 72, 0.15);
+}
+
+.point-xcache {
+  left: 71.2%;
+  bottom: 50.7%;
+  background: #d85eb0;
+  box-shadow: 0 0 0 8px rgba(216, 94, 176, 0.15);
+}
+
+.point-baseline {
+  left: 92%;
+  bottom: 54.3%;
+  width: 31px;
+  height: 31px;
+  background: #858789;
+  box-shadow: 0 0 0 10px rgba(98, 104, 109, 0.14);
+}
+
+.chart-trend {
+  position: absolute;
+  left: 0.2%;
+  bottom: 27%;
+  z-index: 2;
+  width: 15%;
+  height: 33%;
+  border-top: 8px solid rgba(83, 179, 98, 0.42);
+  border-left: 8px solid rgba(83, 179, 98, 0.42);
+  border-radius: 70% 0 0 0;
+  transform: skewY(-9deg);
+}
+
+.chart-arrow {
+  position: absolute;
+  right: 19%;
+  bottom: 39%;
+  z-index: 1;
+  width: 47%;
+  color: #45a33c;
+  font-size: 0.63rem;
+  font-weight: 850;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.chart-arrow::after {
+  content: "";
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  left: 0;
+  border-top: 5px solid #51ad45;
+}
+
+.chart-arrow::before {
+  content: "";
+  position: absolute;
+  top: calc(100% - 2px);
+  left: -1px;
+  border-top: 9px solid transparent;
+  border-right: 14px solid #51ad45;
+  border-bottom: 9px solid transparent;
+}
+
+.tradeoff-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .tradeoff-track {
   display: grid;
-  grid-template-columns: 126px minmax(126px, 0.72fr) minmax(280px, 1.55fr);
-  gap: 14px;
+  grid-template-columns: 118px minmax(0, 1fr);
+  gap: 10px 12px;
   align-items: stretch;
 }
 
@@ -308,7 +554,7 @@ a:focus-visible {
 
 .tradeoff-policy,
 .tradeoff-route {
-  min-height: 82px;
+  min-height: 58px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -318,7 +564,7 @@ a:focus-visible {
 }
 
 .tradeoff-policy {
-  padding: 14px;
+  padding: 11px 12px;
   border-radius: 14px;
   background: #eee9f7;
 }
@@ -340,8 +586,9 @@ a:focus-visible {
 }
 
 .tradeoff-points {
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 
@@ -351,9 +598,9 @@ a:focus-visible {
 
 .tradeoff-point {
   padding: 12px 14px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 5px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
   align-items: center;
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -361,7 +608,7 @@ a:focus-visible {
 }
 
 .tradeoff-point > span {
-  grid-column: 1 / -1;
+  width: 100%;
   color: var(--muted);
   font-size: 0.7rem;
   font-weight: 800;
@@ -369,24 +616,34 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
-.tradeoff-point div {
-  min-width: 0;
+.tradeoff-metrics {
+  width: 100%;
   display: flex;
-  flex-direction: column;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.tradeoff-point strong {
+.tradeoff-metrics > div {
+  min-width: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.tradeoff-metrics strong {
   color: var(--ink);
   font-family: var(--font-display);
   font-size: 1.18rem;
   line-height: 1.12;
 }
 
-.tradeoff-point small {
-  margin-top: 2px;
+.tradeoff-metrics small {
   color: var(--muted);
   font-size: 0.63rem;
   line-height: 1.25;
+  white-space: nowrap;
 }
 
 .tradeoff-point-mars {
@@ -938,13 +1195,13 @@ a:focus-visible {
     border-top: 1px solid var(--line);
   }
 
-  .tradeoff-showcase {
+  .tradeoff-intro,
+  .tradeoff-body {
     grid-template-columns: 1fr;
-    gap: 24px;
   }
 
   .tradeoff-track {
-    grid-template-columns: 112px minmax(118px, 0.7fr) minmax(260px, 1.5fr);
+    grid-template-columns: 118px minmax(0, 1fr);
   }
 
   .abstract-copy,
@@ -1003,6 +1260,39 @@ a:focus-visible {
     padding: 14px;
   }
 
+  .tradeoff-intro {
+    gap: 10px;
+  }
+
+  .tradeoff-intro .eyebrow {
+    margin-bottom: 4px;
+  }
+
+  .tradeoff-chart-card {
+    padding: 14px 10px 12px;
+  }
+
+  .tradeoff-chart-header {
+    padding: 0 4px;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .tradeoff-legend {
+    justify-content: flex-start;
+  }
+
+  .tradeoff-chart {
+    height: 265px;
+  }
+
+  .chart-arrow {
+    right: 11%;
+    width: 54%;
+    font-size: 0.55rem;
+  }
+
   .tradeoff-track {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -1027,6 +1317,18 @@ a:focus-visible {
 
   .tradeoff-points {
     grid-template-columns: 1fr;
+  }
+
+  .tradeoff-metrics {
+    gap: 8px;
+  }
+
+  .tradeoff-metrics strong {
+    font-size: 1.05rem;
+  }
+
+  .tradeoff-metrics small {
+    font-size: 0.56rem;
   }
 
   .tradeoff-context {

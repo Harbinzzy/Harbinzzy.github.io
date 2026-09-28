@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://harbinzzy.github.io/projects/mars.html">
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@500;700&amp;family=Noto+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="icon" href="../assets/mars-logo.png?v=optimized-640">
-  <link rel="stylesheet" href="../assets/site.css?v=20260928-tradeoff">
+  <link rel="stylesheet" href="../assets/site.css?v=20260928-tradeoff-chart">
 </head>
 <body class="project-page">
   <header class="site-header project-header">
@@ -67,35 +67,78 @@
         <h2 id="tradeoff-title">One policy, multiple efficient operating points</h2>
         <p>MARS improves inference efficiency without retraining the underlying World Action Model.</p>
       </div>
-      <div class="tradeoff-panel" aria-label="Relative performance and speedup on LIBERO-PRO">
-        <div class="tradeoff-track tradeoff-track-baseline">
-          <div class="tradeoff-policy">Pre-trained<br>WAM</div>
-          <div class="tradeoff-route">Original inference <span aria-hidden="true">→</span></div>
-          <div class="tradeoff-points tradeoff-points-single">
-            <article class="tradeoff-point">
-              <span>Baseline</span>
-              <div><strong>100.00%</strong><small>relative performance</small></div>
-              <div><strong>1.00×</strong><small>speedup</small></div>
-            </article>
+      <div class="tradeoff-body">
+        <div class="tradeoff-chart-card" aria-label="LIBERO-PRO speed-performance trade-off">
+          <div class="tradeoff-chart-header">
+            <strong>LIBERO-PRO speed–performance trade-off</strong>
+            <div class="tradeoff-legend" aria-label="Chart legend">
+              <span><i class="legend-dot legend-dot-baseline"></i>Cosmos Policy</span>
+              <span><i class="legend-dot legend-dot-dicache"></i>DiCache</span>
+              <span><i class="legend-dot legend-dot-c3"></i>C³Cache</span>
+              <span><i class="legend-dot legend-dot-xcache"></i>X-Cache</span>
+              <span class="legend-ours"><i class="legend-dot legend-dot-ours-1"></i><i class="legend-dot legend-dot-ours-2"></i><i class="legend-dot legend-dot-ours-3"></i><i class="legend-dot legend-dot-ours-4"></i><i class="legend-dot legend-dot-ours-5"></i>Ours</span>
+            </div>
+          </div>
+          <div class="tradeoff-chart">
+            <span class="chart-y-title">Success Rate (%)</span>
+            <div class="chart-y-ticks" aria-hidden="true">
+              <span>47.0</span><span>46.5</span><span>46.0</span><span>45.5</span><span>45.0</span><span>44.5</span><span>44.0</span>
+            </div>
+            <div class="chart-plot" aria-hidden="true">
+              <i class="chart-point point-ours point-ours-1" title="Ours: 0.3122 s, 44.97%"></i>
+              <i class="chart-point point-ours point-ours-2" title="Ours: 0.3495 s, 45.13%"></i>
+              <i class="chart-point point-ours point-ours-3" title="Ours: 0.3564 s, 45.53%"></i>
+              <i class="chart-point point-ours point-ours-4" title="Ours: 0.4537 s, 45.78%"></i>
+              <i class="chart-point point-ours point-ours-5" title="Ours: 0.4558 s, 45.72%"></i>
+              <i class="chart-point point-other point-c3" title="C3Cache"></i>
+              <i class="chart-point point-other point-dicache" title="DiCache"></i>
+              <i class="chart-point point-other point-xcache" title="X-Cache"></i>
+              <i class="chart-point point-baseline" title="Cosmos Policy"></i>
+              <span class="chart-trend"></span>
+              <span class="chart-arrow">Better speed–performance trade-off</span>
+            </div>
+            <div class="chart-x-ticks" aria-hidden="true">
+              <span>0.3</span><span>0.5</span><span>0.7</span><span>0.9</span><span>1.1</span><span>1.3</span><span>1.5</span>
+            </div>
+            <span class="chart-x-title">Average Latency (s)</span>
           </div>
         </div>
-        <div class="tradeoff-track tradeoff-track-mars">
-          <div class="tradeoff-policy">Pre-trained<br>WAM</div>
-          <div class="tradeoff-route tradeoff-route-mars"><strong>+ MARS</strong> <span aria-hidden="true">→</span></div>
-          <div class="tradeoff-points">
-            <article class="tradeoff-point tradeoff-point-mars">
-              <span>Performance-oriented</span>
-              <div><strong>100.20%</strong><small>relative performance</small></div>
-              <div><strong>3.08×</strong><small>speedup</small></div>
-            </article>
-            <article class="tradeoff-point tradeoff-point-mars">
-              <span>Speed-oriented</span>
-              <div><strong>98.55%</strong><small>relative performance</small></div>
-              <div><strong>4.50×</strong><small>speedup</small></div>
-            </article>
+        <div class="tradeoff-panel" aria-label="Relative performance and speedup on LIBERO-PRO">
+          <div class="tradeoff-track tradeoff-track-baseline">
+            <div class="tradeoff-policy">Pre-trained WAM</div>
+            <div class="tradeoff-route">Original inference <span aria-hidden="true">→</span></div>
+            <div class="tradeoff-points tradeoff-points-single">
+              <article class="tradeoff-point">
+                <span>Baseline</span>
+                <div class="tradeoff-metrics">
+                  <div><strong>100.00%</strong><small>relative performance</small></div>
+                  <div><strong>1.00×</strong><small>speedup</small></div>
+                </div>
+              </article>
+            </div>
           </div>
+          <div class="tradeoff-track tradeoff-track-mars">
+            <div class="tradeoff-policy">Pre-trained WAM</div>
+            <div class="tradeoff-route tradeoff-route-mars"><strong>+ MARS</strong> <span aria-hidden="true">→</span></div>
+            <div class="tradeoff-points">
+              <article class="tradeoff-point tradeoff-point-mars">
+                <span>Performance-oriented</span>
+                <div class="tradeoff-metrics">
+                  <div><strong>100.20%</strong><small>relative performance</small></div>
+                  <div><strong>3.08×</strong><small>speedup</small></div>
+                </div>
+              </article>
+              <article class="tradeoff-point tradeoff-point-mars">
+                <span>Speed-oriented</span>
+                <div class="tradeoff-metrics">
+                  <div><strong>98.55%</strong><small>relative performance</small></div>
+                  <div><strong>4.50×</strong><small>speedup</small></div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <p class="tradeoff-context">LIBERO-PRO performance is normalized to the pre-trained Cosmos Policy.</p>
         </div>
-        <p class="tradeoff-context">LIBERO-PRO performance is normalized to the pre-trained Cosmos Policy.</p>
       </div>
     </section>
 
