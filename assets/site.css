@@ -251,6 +251,161 @@ a:focus-visible {
   letter-spacing: 0.02em;
 }
 
+.tradeoff-showcase {
+  margin: 0 auto 76px;
+  padding: 34px;
+  display: grid;
+  grid-template-columns: minmax(230px, 0.72fr) minmax(0, 1.8fr);
+  gap: 34px;
+  align-items: center;
+  border: 1px solid #cfe0ef;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 4% 0%, rgba(32, 201, 239, 0.12), transparent 38%),
+    linear-gradient(145deg, #f8fbff, #eef6fb);
+  box-shadow: 0 20px 58px rgba(18, 77, 145, 0.11);
+}
+
+.tradeoff-intro .eyebrow {
+  margin-bottom: 10px;
+}
+
+.tradeoff-intro h2 {
+  margin: 0 0 13px;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 2.8vw, 2.55rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.tradeoff-intro > p:last-child {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.tradeoff-panel {
+  padding: 18px;
+  border: 1px solid rgba(159, 187, 214, 0.62);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.tradeoff-track {
+  display: grid;
+  grid-template-columns: 126px minmax(126px, 0.72fr) minmax(280px, 1.55fr);
+  gap: 14px;
+  align-items: stretch;
+}
+
+.tradeoff-track + .tradeoff-track {
+  margin-top: 13px;
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
+}
+
+.tradeoff-policy,
+.tradeoff-route {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.tradeoff-policy {
+  padding: 14px;
+  border-radius: 14px;
+  background: #eee9f7;
+}
+
+.tradeoff-route {
+  gap: 10px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.tradeoff-route span {
+  color: var(--ink);
+  font-size: 1.45rem;
+}
+
+.tradeoff-route-mars strong,
+.tradeoff-route-mars span {
+  color: #3f9835;
+}
+
+.tradeoff-points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.tradeoff-points-single {
+  grid-template-columns: 1fr;
+}
+
+.tradeoff-point {
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px 12px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--white);
+}
+
+.tradeoff-point > span {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tradeoff-point div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.tradeoff-point strong {
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.18rem;
+  line-height: 1.12;
+}
+
+.tradeoff-point small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.63rem;
+  line-height: 1.25;
+}
+
+.tradeoff-point-mars {
+  border-color: rgba(89, 170, 76, 0.42);
+  background: linear-gradient(145deg, #ffffff, #f0faed);
+}
+
+.tradeoff-point-mars > span,
+.tradeoff-point-mars strong {
+  color: #37822f;
+}
+
+.tradeoff-context {
+  margin: 12px 2px 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-align: right;
+}
+
 .content-section {
   padding: 92px 0;
   border-top: 1px solid var(--line);
@@ -325,13 +480,14 @@ a:focus-visible {
   font-size: 0.9rem;
 }
 
-.method-caption {
-  max-width: 100%;
-  white-space: nowrap;
-}
-
 .method-detail-figure {
   margin-bottom: 48px;
+}
+
+.method-lead {
+  max-width: none;
+  margin-bottom: 28px;
+  white-space: nowrap;
 }
 
 .motivation-figure {
@@ -782,6 +938,15 @@ a:focus-visible {
     border-top: 1px solid var(--line);
   }
 
+  .tradeoff-showcase {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .tradeoff-track {
+    grid-template-columns: 112px minmax(118px, 0.7fr) minmax(260px, 1.5fr);
+  }
+
   .abstract-copy,
   .motivation-grid,
   .mechanism-grid,
@@ -790,7 +955,7 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  .method-caption {
+  .method-lead {
     white-space: normal;
   }
 
@@ -826,6 +991,46 @@ a:focus-visible {
 
   .hero h1 br {
     display: none;
+  }
+
+  .tradeoff-showcase {
+    margin-bottom: 54px;
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .tradeoff-panel {
+    padding: 14px;
+  }
+
+  .tradeoff-track {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .tradeoff-policy,
+  .tradeoff-route {
+    min-height: auto;
+  }
+
+  .tradeoff-policy {
+    padding: 11px;
+  }
+
+  .tradeoff-route {
+    padding: 2px 0;
+  }
+
+  .tradeoff-route span {
+    transform: rotate(90deg);
+  }
+
+  .tradeoff-points {
+    grid-template-columns: 1fr;
+  }
+
+  .tradeoff-context {
+    text-align: left;
   }
 
   .content-section {

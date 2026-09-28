@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://harbinzzy.github.io/projects/mars.html">
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@500;700&amp;family=Noto+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="icon" href="../assets/mars-logo.png?v=optimized-640">
-  <link rel="stylesheet" href="../assets/site.css?v=20260927-method-caption">
+  <link rel="stylesheet" href="../assets/site.css?v=20260928-tradeoff">
 </head>
 <body class="project-page">
   <header class="site-header project-header">
@@ -58,6 +58,44 @@
         <div><strong>3.94×</strong><span>LIBERO-PRO speedup</span></div>
         <div><strong>2.10×</strong><span>RoboCasa speedup</span></div>
         <div><strong>0</strong><span>additional training</span></div>
+      </div>
+    </section>
+
+    <section class="tradeoff-showcase section-shell" aria-labelledby="tradeoff-title">
+      <div class="tradeoff-intro">
+        <p class="eyebrow">Acceleration at a glance</p>
+        <h2 id="tradeoff-title">One policy, multiple efficient operating points</h2>
+        <p>MARS improves inference efficiency without retraining the underlying World Action Model.</p>
+      </div>
+      <div class="tradeoff-panel" aria-label="Relative performance and speedup on LIBERO-PRO">
+        <div class="tradeoff-track tradeoff-track-baseline">
+          <div class="tradeoff-policy">Pre-trained<br>WAM</div>
+          <div class="tradeoff-route">Original inference <span aria-hidden="true">→</span></div>
+          <div class="tradeoff-points tradeoff-points-single">
+            <article class="tradeoff-point">
+              <span>Baseline</span>
+              <div><strong>100.00%</strong><small>relative performance</small></div>
+              <div><strong>1.00×</strong><small>speedup</small></div>
+            </article>
+          </div>
+        </div>
+        <div class="tradeoff-track tradeoff-track-mars">
+          <div class="tradeoff-policy">Pre-trained<br>WAM</div>
+          <div class="tradeoff-route tradeoff-route-mars"><strong>+ MARS</strong> <span aria-hidden="true">→</span></div>
+          <div class="tradeoff-points">
+            <article class="tradeoff-point tradeoff-point-mars">
+              <span>Performance-oriented</span>
+              <div><strong>100.20%</strong><small>relative performance</small></div>
+              <div><strong>3.08×</strong><small>speedup</small></div>
+            </article>
+            <article class="tradeoff-point tradeoff-point-mars">
+              <span>Speed-oriented</span>
+              <div><strong>98.55%</strong><small>relative performance</small></div>
+              <div><strong>4.50×</strong><small>speedup</small></div>
+            </article>
+          </div>
+        </div>
+        <p class="tradeoff-context">LIBERO-PRO performance is normalized to the pre-trained Cosmos Policy.</p>
       </div>
     </section>
 
@@ -115,11 +153,7 @@
         <span>03</span>
         <h2>Method</h2>
       </div>
-      <div class="figure-frame">
-        <img src="../assets/overview.png" alt="Overview of the three MARS acceleration mechanisms">
-      </div>
-      <p class="figure-caption method-caption">Our method targets redundancy within diffusion steps, across denoising steps, and across consecutive action chunks.</p>
-
+      <p class="section-lead method-lead">Our method targets redundancy within diffusion steps, across denoising steps, and across consecutive action chunks.</p>
       <div class="figure-frame method-detail-figure">
         <img src="../assets/methods.png" alt="Detailed illustration of the MARS method" loading="lazy">
       </div>
