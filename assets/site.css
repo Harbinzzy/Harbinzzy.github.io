@@ -307,26 +307,34 @@ a:focus-visible {
 }
 
 .tradeoff-chart-header {
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
+  margin-bottom: 5px;
+  text-align: center;
   font-size: 0.82rem;
 }
 
 .tradeoff-chart-header > strong {
+  display: block;
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 1rem;
+  white-space: nowrap;
 }
 
 .tradeoff-legend {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  z-index: 5;
+  max-width: 76%;
+  padding: 7px 9px;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: 6px 13px;
+  gap: 5px 10px;
   color: var(--muted);
-  font-size: 0.67rem;
+  border: 1px solid rgba(135, 149, 162, 0.24);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 0.59rem;
   font-weight: 750;
 }
 
@@ -362,9 +370,9 @@ a:focus-visible {
 }
 
 .tradeoff-chart {
-  height: 310px;
+  height: 350px;
   position: relative;
-  padding: 10px 8px 54px 52px;
+  padding: 8px 8px 78px 62px;
 }
 
 .chart-y-title,
@@ -377,23 +385,24 @@ a:focus-visible {
 }
 
 .chart-y-title {
-  left: -14px;
-  top: 47%;
-  transform: translateY(-50%) rotate(-90deg);
+  top: 46%;
+  left: 1px;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotate(180deg);
 }
 
 .chart-x-title {
-  left: calc(50% + 26px);
-  bottom: 0;
+  left: calc(50% + 31px);
+  bottom: 2px;
   transform: translateX(-50%);
 }
 
 .chart-y-ticks {
   position: absolute;
   top: 4px;
-  bottom: 50px;
-  left: 0;
-  width: 43px;
+  bottom: 75px;
+  left: 22px;
+  width: 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -406,8 +415,8 @@ a:focus-visible {
 .chart-x-ticks {
   position: absolute;
   right: 8px;
-  bottom: 28px;
-  left: 52px;
+  bottom: 42px;
+  left: 62px;
   display: flex;
   justify-content: space-between;
   color: var(--muted);
@@ -419,8 +428,8 @@ a:focus-visible {
   position: absolute;
   top: 4px;
   right: 8px;
-  bottom: 50px;
-  left: 52px;
+  bottom: 75px;
+  left: 62px;
   overflow: hidden;
   border-bottom: 1.5px solid #88939f;
   border-left: 1.5px solid #88939f;
@@ -433,8 +442,8 @@ a:focus-visible {
 .chart-point {
   position: absolute;
   z-index: 3;
-  width: 19px;
-  height: 19px;
+  width: 20px;
+  height: 20px;
   display: block;
   border: 2px solid rgba(255, 255, 255, 0.92);
   border-radius: 50%;
@@ -450,18 +459,20 @@ a:focus-visible {
 .point-ours-1 { left: 1%; bottom: 32.3%; background: #057442; }
 .point-ours-2 { left: 4.1%; bottom: 37.7%; background: #168849; }
 .point-ours-3 { left: 4.7%; bottom: 51%; background: #299c59; }
-.point-ours-4 { left: 12.8%; bottom: 59.3%; background: #65b96e; }
-.point-ours-5 { left: 13%; bottom: 57.3%; background: #4aaa62; }
+.point-ours-4 { left: 6.1%; bottom: 46.7%; background: #4aaa62; }
+.point-ours-5 { left: 13%; bottom: 57.3%; background: #65b96e; }
 
 .point-other {
-  width: 23px;
-  height: 23px;
+  width: 28px;
+  height: 28px;
 }
 
 .point-c3 {
   left: 26.8%;
   bottom: 20.7%;
   background: #8860bd;
+  width: 25px;
+  height: 25px;
   box-shadow: 0 0 0 7px rgba(136, 96, 189, 0.15);
 }
 
@@ -469,44 +480,54 @@ a:focus-visible {
   left: 44.6%;
   bottom: 60%;
   background: #aa5f48;
-  box-shadow: 0 0 0 8px rgba(170, 95, 72, 0.15);
+  width: 32px;
+  height: 32px;
+  box-shadow: 0 0 0 9px rgba(170, 95, 72, 0.15);
 }
 
 .point-xcache {
   left: 71.2%;
   bottom: 50.7%;
   background: #d85eb0;
-  box-shadow: 0 0 0 8px rgba(216, 94, 176, 0.15);
+  width: 39px;
+  height: 39px;
+  box-shadow: 0 0 0 10px rgba(216, 94, 176, 0.15);
 }
 
 .point-baseline {
   left: 92%;
   bottom: 54.3%;
-  width: 31px;
-  height: 31px;
+  width: 44px;
+  height: 44px;
   background: #858789;
-  box-shadow: 0 0 0 10px rgba(98, 104, 109, 0.14);
+  box-shadow: 0 0 0 11px rgba(98, 104, 109, 0.14);
 }
 
 .chart-trend {
   position: absolute;
-  left: 0.2%;
-  bottom: 27%;
+  left: 0;
+  bottom: 22%;
   z-index: 2;
-  width: 15%;
-  height: 33%;
-  border-top: 8px solid rgba(83, 179, 98, 0.42);
-  border-left: 8px solid rgba(83, 179, 98, 0.42);
-  border-radius: 70% 0 0 0;
-  transform: skewY(-9deg);
+  width: 18.5%;
+  height: 41%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.chart-trend path {
+  fill: none;
+  stroke: rgba(83, 179, 98, 0.42);
+  stroke-width: 8;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
 }
 
 .chart-arrow {
   position: absolute;
-  right: 19%;
-  bottom: 39%;
+  right: 20%;
+  bottom: 40.7%;
   z-index: 1;
-  width: 47%;
+  width: 60%;
   color: #45a33c;
   font-size: 0.63rem;
   font-weight: 850;
@@ -517,7 +538,7 @@ a:focus-visible {
 .chart-arrow::after {
   content: "";
   position: absolute;
-  top: calc(100% + 5px);
+  top: calc(100% + 6px);
   right: 0;
   left: 0;
   border-top: 5px solid #51ad45;
@@ -526,8 +547,8 @@ a:focus-visible {
 .chart-arrow::before {
   content: "";
   position: absolute;
-  top: calc(100% - 2px);
-  left: -1px;
+  top: calc(100% - 1px);
+  left: -12px;
   border-top: 9px solid transparent;
   border-right: 14px solid #51ad45;
   border-bottom: 9px solid transparent;
@@ -654,6 +675,23 @@ a:focus-visible {
 .tradeoff-point-mars > span,
 .tradeoff-point-mars strong {
   color: #37822f;
+}
+
+.tradeoff-ellipsis {
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+}
+
+.tradeoff-ellipsis i {
+  width: 3px;
+  height: 3px;
+  display: block;
+  border-radius: 50%;
+  background: #83a17e;
 }
 
 .tradeoff-context {
@@ -1274,13 +1312,10 @@ a:focus-visible {
 
   .tradeoff-chart-header {
     padding: 0 4px;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
   }
 
-  .tradeoff-legend {
-    justify-content: flex-start;
+  .tradeoff-chart-header > strong {
+    font-size: 0.79rem;
   }
 
   .tradeoff-chart {
@@ -1288,8 +1323,6 @@ a:focus-visible {
   }
 
   .chart-arrow {
-    right: 11%;
-    width: 54%;
     font-size: 0.55rem;
   }
 
