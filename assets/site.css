@@ -81,8 +81,19 @@ a:focus-visible {
   color: var(--accent);
 }
 
+.project-brand {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 650;
+  transition: color 160ms ease;
+}
+
+.project-brand:hover {
+  color: var(--accent);
+}
+
 .project-header {
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .section-shell {
