@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://harbinzzy.github.io/projects/mars.html">
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@500;700&amp;family=Noto+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <link rel="icon" href="../assets/mars-logo.png?v=optimized-640">
-  <link rel="stylesheet" href="../assets/site.css?v=20260929-vector-chart">
+  <link rel="stylesheet" href="../assets/site.css?v=20260929-vector-chart-2">
 </head>
 <body class="project-page">
   <header class="site-header project-header">
@@ -76,12 +76,6 @@
             <svg class="tradeoff-vector-chart" viewBox="0 0 1244 635" role="img" aria-labelledby="tradeoff-chart-svg-title tradeoff-chart-svg-desc">
               <title id="tradeoff-chart-svg-title">LIBERO-PRO speed-performance trade-off</title>
               <desc id="tradeoff-chart-svg-desc">Success rate versus average latency for Cosmos Policy, DiCache, C3Cache, X-Cache, and five MARS operating points. Bubble area represents FLOPs.</desc>
-              <defs>
-                <marker id="tradeoff-arrowhead" markerWidth="46" markerHeight="46" refX="46" refY="23" orient="auto" markerUnits="userSpaceOnUse">
-                  <path d="M0,0 L46,23 L0,46 Z" fill="#51ad45"></path>
-                </marker>
-              </defs>
-
               <rect class="tradeoff-svg-background" x="0" y="0" width="1244" height="635"></rect>
               <g class="tradeoff-svg-grid">
                 <line x1="168" y1="33" x2="168" y2="559"></line>
@@ -180,7 +174,8 @@
                 <circle class="tradeoff-svg-baseline" cx="1100" cy="270" r="31"></circle>
               </g>
 
-              <line class="tradeoff-svg-arrow" x1="1064" y1="340" x2="320" y2="340" marker-end="url(#tradeoff-arrowhead)"></line>
+              <line class="tradeoff-svg-arrow" x1="1064" y1="340" x2="365" y2="340"></line>
+              <path class="tradeoff-svg-arrowhead" d="M365 317 L320 340 L365 363 Z"></path>
               <text class="tradeoff-svg-arrow-label" x="702" y="324" text-anchor="middle">Better speed-performance trade-off</text>
             </svg>
           </div>

@@ -453,6 +453,10 @@ a:focus-visible {
   stroke-width: 11;
 }
 
+.tradeoff-svg-arrowhead {
+  fill: #51ad45;
+}
+
 .tradeoff-svg-arrow-label {
   fill: #45a33c;
   font-size: 29px;
