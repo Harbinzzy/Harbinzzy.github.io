@@ -349,6 +349,116 @@ a:focus-visible {
   display: block;
 }
 
+.tradeoff-vector-chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.tradeoff-svg-background {
+  fill: #ffffff;
+}
+
+.tradeoff-svg-grid line {
+  stroke: #cbd1d4;
+  stroke-width: 1.2;
+  opacity: 0.58;
+}
+
+.tradeoff-svg-frame {
+  fill: none;
+  stroke: #777d80;
+  stroke-width: 1.6;
+}
+
+.tradeoff-svg-tick-marks line {
+  stroke: #595f62;
+  stroke-width: 1.5;
+}
+
+.tradeoff-svg-ticks {
+  fill: #151515;
+  font-size: 23px;
+  font-weight: 500;
+}
+
+.tradeoff-svg-y-ticks {
+  text-anchor: end;
+}
+
+.tradeoff-svg-x-ticks {
+  text-anchor: middle;
+}
+
+.tradeoff-svg-axis-title {
+  fill: #080808;
+  font-size: 29px;
+  font-weight: 800;
+}
+
+.tradeoff-svg-legend rect {
+  fill: rgba(255, 255, 255, 0.92);
+  stroke: #d2d2d2;
+  stroke-width: 1.2;
+}
+
+.tradeoff-svg-legend text {
+  fill: #202020;
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.tradeoff-svg-legend .tradeoff-svg-legend-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.tradeoff-svg-baseline { fill: #858789; }
+.tradeoff-svg-dicache { fill: #aa6049; }
+.tradeoff-svg-c3 { fill: #8b60bd; }
+.tradeoff-svg-xcache { fill: #d85fb0; }
+.tradeoff-svg-ours-1 { fill: #006b45; }
+.tradeoff-svg-ours-2 { fill: #17884c; }
+.tradeoff-svg-ours-3 { fill: #2d9c56; }
+.tradeoff-svg-ours-4 { fill: #46ad61; }
+.tradeoff-svg-ours-5 { fill: #6cbe75; }
+
+.tradeoff-svg-bubbles > circle:not(.tradeoff-svg-halo) {
+  stroke: rgba(255, 255, 255, 0.92);
+  stroke-width: 3;
+}
+
+.tradeoff-svg-halo {
+  opacity: 0.2;
+}
+
+.tradeoff-svg-halo-green { fill: #46ad61; }
+.tradeoff-svg-halo-baseline { fill: #777d80; }
+.tradeoff-svg-halo-dicache { fill: #aa6049; }
+.tradeoff-svg-halo-c3 { fill: #8b60bd; }
+.tradeoff-svg-halo-xcache { fill: #d85fb0; }
+
+.tradeoff-svg-trend {
+  fill: none;
+  stroke: rgba(76, 177, 91, 0.42);
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.tradeoff-svg-arrow {
+  stroke: #51ad45;
+  stroke-width: 11;
+}
+
+.tradeoff-svg-arrow-label {
+  fill: #45a33c;
+  font-size: 29px;
+  font-weight: 850;
+}
+
 .tradeoff-legend {
   position: absolute;
   top: 9px;
