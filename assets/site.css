@@ -426,13 +426,15 @@ a:focus-visible {
 .tradeoff-svg-ours-4 { fill: #46ad61; }
 .tradeoff-svg-ours-5 { fill: #6cbe75; }
 
-.tradeoff-svg-bubbles > circle:not(.tradeoff-svg-halo) {
+.tradeoff-svg-point > circle:not(.tradeoff-svg-halo) {
   stroke: rgba(255, 255, 255, 0.92);
   stroke-width: 3;
+  transition: stroke-width 170ms ease;
 }
 
 .tradeoff-svg-halo {
   opacity: 0.2;
+  transition: opacity 170ms ease;
 }
 
 .tradeoff-svg-halo-green { fill: #46ad61; }
@@ -440,6 +442,30 @@ a:focus-visible {
 .tradeoff-svg-halo-dicache { fill: #aa6049; }
 .tradeoff-svg-halo-c3 { fill: #8b60bd; }
 .tradeoff-svg-halo-xcache { fill: #d85fb0; }
+
+.tradeoff-svg-point {
+  cursor: default;
+  outline: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 170ms ease, filter 170ms ease;
+}
+
+.tradeoff-svg-point:hover,
+.tradeoff-svg-point:focus-visible {
+  filter: drop-shadow(0 8px 7px rgba(11, 29, 54, 0.22));
+  transform: translateY(-4px) scale(1.12);
+}
+
+.tradeoff-svg-point:hover .tradeoff-svg-halo,
+.tradeoff-svg-point:focus-visible .tradeoff-svg-halo {
+  opacity: 0.34;
+}
+
+.tradeoff-svg-point:hover > circle:not(.tradeoff-svg-halo),
+.tradeoff-svg-point:focus-visible > circle:not(.tradeoff-svg-halo) {
+  stroke-width: 4;
+}
 
 .tradeoff-svg-trend {
   fill: none;
