@@ -78,7 +78,7 @@ h3 { margin: 0 0 5px; font-size: 16px; line-height: 1.45; }
 .profile-details p { margin-bottom: 10px; }
 .profile-details p:last-child { margin-bottom: 0; }
 .profile-links, .paper-links { display: flex; flex-wrap: wrap; gap: 6px 18px; }
-.news-list { padding-left: 24px; margin: 8px 0 18px; list-style-type: square; }
+.news-list, .activities-list { padding-left: 24px; margin: 8px 0 18px; list-style-type: square; }
 li { padding-left: 2px; margin-bottom: 8px; }
 .news-date { white-space: nowrap; }
 .publication {
@@ -111,7 +111,6 @@ li { padding-left: 2px; margin-bottom: 8px; }
 .experience-copy h3 { margin-bottom: 8px; font-size: 20px; }
 .experience-copy p { margin: 0; }
 .experience-date { margin: 0; color: #666; white-space: nowrap; }
-#contact a { overflow-wrap: anywhere; }
 footer {
   display: flex;
   justify-content: space-between;
