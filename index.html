@@ -3,40 +3,132 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Research projects by Zengyuan Zuo.">
-  <title>Zengyuan Zuo — Research Projects</title>
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@500;700&amp;family=Noto+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="icon" href="assets/mars-logo.png">
-  <link rel="stylesheet" href="assets/site.css">
+  <meta name="description" content="Zengyuan Zuo, M.Eng. student at Harbin Institute of Technology. Research in low-level vision, image restoration, and embodied AI.">
+  <meta name="author" content="Zengyuan Zuo">
+  <meta name="theme-color" content="#1a52ad">
+  <meta property="og:title" content="Zengyuan Zuo's Homepage">
+  <meta property="og:description" content="M.Eng. student at Harbin Institute of Technology. Low-level vision, image restoration, and embodied AI.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://harbinzzy.github.io/">
+  <meta property="og:image" content="https://harbinzzy.github.io/assets/home/profile.jpg">
+  <link rel="canonical" href="https://harbinzzy.github.io/">
+  <link rel="icon" href="assets/home/profile.jpg">
+  <link rel="stylesheet" href="assets/homepage.css?v=20261011">
+  <title>Zengyuan Zuo's Homepage</title>
 </head>
-<body class="index-page">
-  <header class="site-header">
-    <a class="site-name" href="/">Zengyuan Zuo</a>
-    <span class="site-context">Research Projects</span>
-  </header>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="page-layout">
+    <aside class="sidebar">
+      <nav aria-label="Main navigation">
+        <div class="menu-category">menu</div>
+        <a class="current" href="./" aria-current="page">Home</a>
+        <a href="#about">About me</a>
+        <a href="#news">News</a>
+        <a href="#publications">Publications</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </aside>
 
-  <main class="project-index" id="main-content">
-    <p class="eyebrow">Selected work</p>
-    <h1>Research projects</h1>
-    <p class="index-intro">Project pages, results, and open-source implementations.</p>
-
-    <a class="project-card" href="projects/mars.html" aria-label="Open the MARS project page">
-      <div class="project-card-copy">
-        <span class="project-tag">World Action Models · Inference Efficiency</span>
-        <h2>MARS</h2>
-        <p>Multi-Level Acceleration via Redundant Computation Skipping for WAMs</p>
+    <main id="main-content">
+      <header class="page-title"><h1>Zengyuan Zuo</h1></header>
+      <div class="profile">
+        <img class="profile-photo" src="assets/home/profile.jpg" alt="Zengyuan Zuo" width="150" height="184" fetchpriority="high">
+        <div class="profile-details">
+          <p>M.Eng. Student<br>
+            <a href="https://www.hit.edu.cn/">Harbin Institute of Technology</a><br>
+            哈尔滨工业大学<br>Harbin, China
+          </p>
+          <p class="emails">
+            <a href="mailto:13238827809@163.com">13238827809@163.com</a><br>
+            <a href="mailto:3565741165@qq.com">3565741165@qq.com</a>
+          </p>
+          <p class="profile-links">
+            <a href="https://github.com/Harbinzzy">GitHub</a>
+            <a href="https://scholar.google.com/citations?user=jb-4yJgAAAAJ&amp;hl=en">Google Scholar</a>
+          </p>
+        </div>
       </div>
-      <div class="project-card-metric">
-        <strong>4.0×</strong>
-        <span>speedup</span>
-      </div>
-      <span class="project-arrow" aria-hidden="true">↗</span>
-    </a>
-  </main>
 
-  <footer class="site-footer">
-    <span>© 2026 Zengyuan Zuo</span>
-    <a href="https://github.com/Harbinzzy">GitHub</a>
-  </footer>
+      <section id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About me</h2>
+        <p>I am currently pursuing an M.Eng. degree in the Faculty of Computing at <a href="https://www.hit.edu.cn/">Harbin Institute of Technology (HIT)</a>. I received my B.E. degree from HIT in 2024.</p>
+        <p>My research interests include <strong>low-level vision</strong>, <strong>image restoration</strong>, and <strong>embodied AI</strong>.</p>
+        <p>Please feel free to <a href="mailto:13238827809@163.com">contact me</a> if you are interested in my research.</p>
+      </section>
+
+      <section id="news" aria-labelledby="news-title">
+        <h2 id="news-title">News</h2>
+        <ul class="news-list">
+          <li><span class="news-date">[2026-01]</span> <a href="https://arxiv.org/abs/2601.06909">UDPNet</a>, our work on depth-guided image dehazing, is available on arXiv with <a href="https://github.com/Harbinzzy/UDPNet">code and pretrained models</a>.</li>
+          <li><span class="news-date">[2025]</span> Our survey on all-in-one image restoration is published in <strong>IEEE TPAMI</strong>. The <a href="https://github.com/Harbinzzy/All-in-One-Image-Restoration-Survey">paper collection and benchmarks</a> are actively maintained.</li>
+        </ul>
+      </section>
+
+      <section id="publications" aria-labelledby="publications-title">
+        <h2 id="publications-title">Selected Publications</h2>
+        <article class="publication">
+          <a class="publication-image" href="https://arxiv.org/abs/2601.06909" aria-label="Read the UDPNet paper">
+            <img src="assets/home/udpnet.jpg" alt="Overview of the UDPNet depth-guided image dehazing framework" width="180" height="85" loading="lazy">
+          </a>
+          <div class="publication-copy">
+            <h3><a href="https://arxiv.org/abs/2601.06909">UDPNet: Unleashing Depth-based Priors for Robust Image Dehazing</a></h3>
+            <p><strong>Zengyuan Zuo</strong>, Junjun Jiang, Gang Wu, Xianming Liu<br>
+              <em>arXiv preprint, 2026.</em>
+            </p>
+            <p class="paper-links"><a href="https://arxiv.org/pdf/2601.06909">PDF</a><a href="https://github.com/Harbinzzy/UDPNet">Code</a></p>
+          </div>
+        </article>
+        <article class="publication">
+          <a class="publication-image" href="https://ieeexplore.ieee.org/document/11123156" aria-label="Read the all-in-one image restoration survey">
+            <img src="assets/home/survey.png" alt="Taxonomy of the all-in-one image restoration survey" width="180" height="72" loading="lazy">
+          </a>
+          <div class="publication-copy">
+            <h3><a href="https://ieeexplore.ieee.org/document/11123156">A Survey on All-in-One Image Restoration: Taxonomy, Evaluation and Future Trends</a></h3>
+            <p>Junjun Jiang, <strong>Zengyuan Zuo</strong>, Gang Wu, Kui Jiang, Xianming Liu<br>
+              <em>IEEE Transactions on Pattern Analysis and Machine Intelligence (TPAMI), 2025.</em>
+            </p>
+            <p class="paper-links"><a href="https://arxiv.org/pdf/2410.15067">PDF</a><a href="https://ieeexplore.ieee.org/document/11123156">Journal</a><a href="https://github.com/Harbinzzy/All-in-One-Image-Restoration-Survey">Code &amp; Resources</a></p>
+          </div>
+        </article>
+      </section>
+
+      <section id="projects" aria-labelledby="projects-title">
+        <h2 id="projects-title">Research Projects</h2>
+        <article class="publication">
+          <a class="publication-image" href="projects/mars.html" aria-label="Open the MARS project page">
+            <img src="assets/overview.png" alt="Overview of MARS multi-level acceleration for world action models" width="180" height="71" loading="lazy">
+          </a>
+          <div class="publication-copy">
+            <h3><a href="projects/mars.html">MARS: Systematic Multi-Level Acceleration for World Action Models</a></h3>
+            <p><strong>Zengyuan Zuo*</strong>, Yongchang Zhang*, Guangyu Zhao, Tianze Zhang, Biao Wu, Meng Fang, Yiwu Zhong<br>
+              <em>Research project. * Equal contribution.</em>
+            </p>
+            <p>Training-free inference acceleration for world action models.</p>
+            <p class="paper-links"><a href="projects/mars.html">Project</a><a href="https://github.com/PKU-VaLuE-Lab/MARS">Code</a></p>
+          </div>
+        </article>
+      </section>
+
+      <section id="education" aria-labelledby="education-title">
+        <h2 id="education-title">Education</h2>
+        <ul class="education-list">
+          <li><strong>Harbin Institute of Technology</strong> — M.Eng. in the Faculty of Computing, currently pursuing</li>
+          <li><strong>Harbin Institute of Technology</strong> — B.E., 2024</li>
+        </ul>
+      </section>
+
+      <section id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+        <p>Email: <a href="mailto:13238827809@163.com">13238827809@163.com</a> / <a href="mailto:3565741165@qq.com">3565741165@qq.com</a><br>
+          Harbin Institute of Technology, Harbin, China
+        </p>
+      </section>
+
+      <footer><span>© 2026 Zengyuan Zuo</span><span>Last updated: October 2026</span></footer>
+    </main>
+  </div>
 </body>
 </html>
