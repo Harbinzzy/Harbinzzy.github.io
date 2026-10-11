@@ -78,7 +78,7 @@ h3 { margin: 0 0 5px; font-size: 16px; line-height: 1.45; }
 .profile-details p { margin-bottom: 10px; }
 .profile-details p:last-child { margin-bottom: 0; }
 .profile-links, .paper-links { display: flex; flex-wrap: wrap; gap: 6px 18px; }
-.news-list, .education-list { padding-left: 24px; margin: 8px 0 18px; list-style-type: square; }
+.news-list { padding-left: 24px; margin: 8px 0 18px; list-style-type: square; }
 li { padding-left: 2px; margin-bottom: 8px; }
 .news-date { white-space: nowrap; }
 .publication {
@@ -93,6 +93,24 @@ li { padding-left: 2px; margin-bottom: 8px; }
 .publication-copy { min-width: 0; }
 .publication-copy p { margin-bottom: 5px; }
 .publication-copy .paper-links { margin: 6px 0 0; }
+.experience-entry {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 24px;
+  margin: 20px 0;
+}
+.experience-logo {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  padding: 9px;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+}
+.experience-copy h3 { margin-bottom: 8px; font-size: 20px; }
+.experience-copy p { margin: 0; }
+.experience-date { margin: 0; color: #666; white-space: nowrap; }
 #contact a { overflow-wrap: anywhere; }
 footer {
   display: flex;
@@ -118,6 +136,9 @@ footer {
   .profile-photo { flex-basis: 130px; width: 130px; height: 159px; }
   .publication { grid-template-columns: 150px minmax(0, 1fr); gap: 18px; }
   .publication-image img { width: 150px; }
+  .experience-entry { grid-template-columns: 76px minmax(0, 1fr); gap: 6px 18px; }
+  .experience-logo { grid-row: 1 / 3; width: 76px; height: 76px; }
+  .experience-date { grid-column: 2; font-size: 14px; }
 }
 @media (max-width: 480px) {
   main { padding-right: 16px; padding-left: 16px; }
@@ -126,6 +147,8 @@ footer {
   .profile-photo { flex-basis: auto; width: 150px; height: 184px; }
   .publication { grid-template-columns: minmax(0, 1fr); gap: 13px; margin-bottom: 30px; }
   .publication-image img { width: 180px; }
+  .experience-entry { grid-template-columns: 66px minmax(0, 1fr); column-gap: 15px; }
+  .experience-logo { width: 66px; height: 66px; padding: 7px; }
   h2 { margin-top: 27px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
@@ -133,5 +156,5 @@ footer {
   .page-layout { display: block; }
   .sidebar, .skip-link { display: none; }
   main { padding: 0; }
-  .publication { break-inside: avoid; }
+  .publication, .experience-entry { break-inside: avoid; }
 }
