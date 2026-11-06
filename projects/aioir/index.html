@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AiOIR Survey · Papers & Benchmarks</title>
+  <meta name="description" content="A curated research library for all-in-one image restoration. Explore papers, code and five benchmark families from the TPAMI survey.">
+  <meta name="theme-color" content="#102d32"><meta property="og:title" content="All-in-One Image Restoration · Research Library">
+  <meta property="og:description" content="Papers, open-source code and source-linked benchmarks for all-in-one image restoration.">
+  <meta property="og:image" content="https://harbinzzy.github.io/assets/home/survey.png">
+  <link rel="canonical" href="https://harbinzzy.github.io/projects/aioir/">
+  <link rel="icon" type="image/svg+xml" href="icon.svg"><link rel="stylesheet" href="style.css?v=20261106">
+  <script src="catalog.js?v=20261106" defer></script><script src="app.js?v=20261106" defer></script>
+</head>
+<body data-page="papers">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header"><div class="nav-wrap">
+    <a href="./" class="brand" aria-label="AiOIR Survey home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M5 6h17v17H5zM10 11h17v17H10z"/></svg><span>AiOIR<span class="brand-light"> / Survey</span></span></a>
+    <nav aria-label="Main navigation"><a class="active" aria-current="page" href="./">Paper library</a><a href="leaderboard.html">Leaderboard</a><a class="nav-external" href="https://github.com/Harbinzzy/All-in-One-Image-Restoration-Survey" target="_blank" rel="noopener">GitHub ↗</a></nav>
+  </div></header>
+  <main id="main">
+    <section class="hero container">
+      <div class="hero-copy"><div class="eyebrow"><span class="status-dot"></span> IEEE TPAMI 2025 <span class="eyebrow-divider">/</span> A living research collection</div>
+        <h1>One model.<br><span>Every degradation.</span></h1>
+        <p class="hero-description">A research library for <strong>all-in-one image restoration</strong>.<br>Discover the methods. Explore the evidence. Find what’s next.</p>
+        <div class="hero-actions"><a class="button primary" href="#library">Explore papers <span>↓</span></a><a class="button secondary" href="leaderboard.html">View leaderboard <span>↗</span></a></div>
+        <div class="hero-stats"><div><strong data-stat="papers">270</strong><span>curated papers</span></div><div><strong>5</strong><span>benchmark families</span></div><div><strong data-stat="results">173</strong><span>reported results</span></div></div>
+      </div>
+      <aside class="survey-panel"><div class="panel-label">THE SURVEY <span>01 / RESEARCH MAP</span></div><h2>A Survey on All-in-One Image Restoration</h2><p class="survey-subtitle">Taxonomy, Evaluation and Future Trends</p><a href="../../assets/home/survey.png" target="_blank" aria-label="Open the survey taxonomy figure"><img src="../../assets/home/survey.png" alt="Taxonomy of all-in-one image restoration methods from the survey" width="800" height="325"></a><p class="authors"><a href="https://homepage.hit.edu.cn/jiangjunjun">Junjun Jiang</a>, <a href="https://scholar.google.com/citations?user=jb-4yJgAAAAJ">Zengyuan Zuo</a>, Gang Wu, Kui Jiang, Xianming Liu</p><p class="affiliation">AIIA Lab · Harbin Institute of Technology</p><div class="resource-links"><a href="https://arxiv.org/abs/2410.15067">Read paper ↗</a><a href="https://ieeexplore.ieee.org/document/11123156">TPAMI ↗</a><a href="#citation">BibTeX ↓</a></div></aside>
+    </section>
+    <div class="update-strip"><div class="container"><span class="update-label">LATEST UPDATE</span><p><strong>2026 results are here.</strong> ClusIR, QuReC, DRNet, SLER-IR, DCMPC-Net & WeatherRemover.</p><a href="leaderboard.html?new=1">Explore new results ↗</a></div></div>
+    <section class="container library-section" id="library" aria-labelledby="library-heading"><div class="section-heading"><div><p class="eyebrow">THE RESEARCH LANDSCAPE</p><h2 id="library-heading">Paper library<span class="count-pill" id="paper-count">270</span></h2></div><p class="quiet">From early foundations to the latest methods.</p></div>
+      <div class="library-toolbar"><label class="search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg><input type="search" id="paper-search" aria-label="Search papers" placeholder="Search title, author, venue or method…"></label><label class="select-field"><span>Venue</span><select id="venue-filter" aria-label="Filter by venue"><option value="">All venues</option></select></label><label class="checkbox-label"><input id="code-filter" type="checkbox"> With code</label></div>
+      <div class="year-tabs" id="year-tabs" aria-label="Filter by year"></div>
+      <div class="results-meta"><span id="paper-status" aria-live="polite">Loading papers…</span><button class="text-button" id="reset-papers">Reset filters ↺</button></div><div id="papers" class="paper-list"></div><div id="paper-pagination" class="pagination"></div><noscript><p>Enable JavaScript to search the library, or <a href="https://github.com/Harbinzzy/All-in-One-Image-Restoration-Survey#all-in-one-image-restoration-paper-list">read the complete paper list on GitHub</a>.</p></noscript>
+    </section>
+    <section id="citation" class="container citation-section"><div><p class="eyebrow">REFERENCE</p><h2>Cite the survey</h2><p>If this collection supports your research, please cite our survey.</p><button class="button secondary" id="copy-citation">Copy BibTeX</button><span id="copy-status" role="status"></span></div><pre id="bibtex">@article{jiang2025survey,
+  title={A survey on all-in-one image restoration:
+    Taxonomy, evaluation and future trends},
+  author={Jiang, Junjun and Zuo, Zengyuan and Wu, Gang
+    and Jiang, Kui and Liu, Xianming},
+  journal={IEEE Transactions on Pattern Analysis
+    and Machine Intelligence},
+  volume={47}, number={12}, pages={11892--11911},
+  year={2025}
+}</pre></section>
+  </main>
+  <footer class="site-footer container"><div><a class="footer-brand" href="./">AiOIR Survey</a><p>Mapping the progress of all-in-one image restoration.</p></div><div><a href="https://github.com/Harbinzzy/All-in-One-Image-Restoration-Survey">Source & contributions ↗</a><span id="data-status">Data updated 6 Nov 2026</span><a href="../../">Zengyuan Zuo’s homepage ↗</a></div></footer>
+</body></html>
