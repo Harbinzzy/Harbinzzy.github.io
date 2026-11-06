@@ -9,15 +9,14 @@
   let paperState = {year:'', query:'', venue:'', code:false, page:1};
   const params = new URLSearchParams(location.search);
   let boardState = {group:params.get('benchmark') || 'three',track:params.get('track') || 'weatherstream',metric:params.get('metric') || 'both',category:params.get('category') ?? 'All-in-One',query:params.get('q') || '',onlyNew:params.get('new') === '1',sort:params.get('sort') || 'avg',dir:params.get('dir') === 'asc' ? 1 : -1};
-  const page = document.body.dataset.page;
   let visibleRows = [];
 
   function common() {
     document.querySelectorAll('[data-stat="papers"]').forEach(e => e.textContent = catalog.papers.length);
     document.querySelectorAll('[data-stat="results"]').forEach(e => e.textContent = catalog.benchmarks.reduce((sum,b) => sum+b.rows.length,0));
     $('data-status').textContent = 'Data updated ' + new Date(catalog.updated+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
-    if (page === 'papers') initPapers();
-    else initBoard();
+    initPapers();
+    initBoard();
   }
   function venueOf(p) {
     const venue=p.venue.replace(/\s*20\d\d.*/,'').trim();
@@ -45,7 +44,7 @@
     paperState.page=Math.min(pages,paperState.page);
     const start=(paperState.page-1)*size;
     $('paper-status').textContent=rows.length?`${start+1}–${Math.min(start+size,rows.length)} of ${rows.length} papers`:'No papers match these filters';
-    $('papers').innerHTML=rows.slice(start,start+size).map(p=>`<article class="paper-row"><div class="paper-year"><strong>${p.year}</strong>RESEARCH</div><div><h3>${p.paper?link(p.paper,esc(p.title)):esc(p.title)}</h3><p class="paper-authors">${esc(p.authors)}</p><span class="venue-tag">${esc(p.venue)}</span></div><div class="paper-actions">${link(p.paper,'Paper ↗')}${link(p.code,'Code ↗')}</div></article>`).join('') || '<div class="empty-state">No matching papers. Try a different search or reset the filters.</div>';
+    $('papers').innerHTML=rows.slice(start,start+size).map(p=>`<article class="paper-row"><div class="paper-year"><strong>${p.year}</strong></div><div><h3>${p.paper?link(p.paper,esc(p.title)):esc(p.title)}</h3><p class="paper-authors">${esc(p.authors)}</p><span class="venue-tag">${esc(p.venue)}</span></div><div class="paper-actions">${link(p.paper,'Paper ↗')}${link(p.code,'Code ↗')}</div></article>`).join('') || '<div class="empty-state">No matching papers. Try a different search or reset the filters.</div>';
     $('paper-pagination').innerHTML=rows.length?`<button id="prev-page" ${paperState.page===1?'disabled':''}>← Previous</button><span>Page ${paperState.page} / ${pages}</span><button id="next-page" ${paperState.page===pages?'disabled':''}>Next →</button>`:'';
     if($('prev-page'))$('prev-page').onclick=()=>{paperState.page--;renderPapers();$('library').scrollIntoView({block:'start'});};
     if($('next-page'))$('next-page').onclick=()=>{paperState.page++;renderPapers();$('library').scrollIntoView({block:'start'});};
@@ -55,19 +54,19 @@
   function activeMetric() { return boardState.metric==='both'?'psnr':boardState.metric; }
   function metricIndex() { return {psnr:0,ssim:1,lpips:2}[activeMetric()]; }
   function rowsInTrack() {const g=group();return g.rows.filter(r=>!g.tracks || r.track===boardState.track);}
-  function initBoard() {
+  function initBoard(persistUrl = false) {
     const g=group();boardState.group=g.id;
     if (g.tracks && !g.tracks.some(t=>t.id===boardState.track)) boardState.track=g.tracks[0].id;
     if (!g.columns.some(c=>c.id===boardState.sort) && boardState.sort!=='method' && boardState.sort!=='params') boardState.sort='avg';
     if (!['both','psnr','ssim','lpips'].includes(boardState.metric) || boardState.metric==='lpips' && boardState.track!=='weatherbench')boardState.metric='both';
     $('benchmark-tabs').innerHTML=catalog.benchmarks.map((b,i)=>`<button type="button" data-group="${b.id}" class="${b.id===g.id?'active':''}" aria-pressed="${b.id===g.id}">${esc(b.short)}<span>${String(i+1).padStart(2,'0')}</span></button>`).join('');
-    $('benchmark-tabs').onclick=e=>{const b=e.target.closest('[data-group]');if(b){boardState.group=b.dataset.group;boardState.sort='avg';boardState.category=['three','five'].includes(boardState.group)?'All-in-One':'';boardState.query='';boardState.metric='both';boardState.dir=-1;initBoard();}};
+    $('benchmark-tabs').onclick=e=>{const b=e.target.closest('[data-group]');if(b){boardState.group=b.dataset.group;boardState.sort='avg';boardState.category=['three','five'].includes(boardState.group)?'All-in-One':'';boardState.query='';boardState.metric='both';boardState.dir=-1;initBoard(true);}};
     $('benchmark-kicker').textContent=`BENCHMARK ${String(catalog.benchmarks.indexOf(g)+1).padStart(2,'0')} / 05`;
     $('board-title').textContent=g.title;
     $('board-description').textContent=g.description;
     $('track-tabs').hidden=!g.tracks;
     $('track-tabs').innerHTML=(g.tracks||[]).map(t=>`<button type="button" data-track="${t.id}" class="${t.id===boardState.track?'active':''}" aria-pressed="${t.id===boardState.track}">${esc(t.label)}</button>`).join('');
-    $('track-tabs').onclick=e=>{const b=e.target.closest('[data-track]');if(b){boardState.track=b.dataset.track;boardState.category='';boardState.metric='both';boardState.dir=-1;initBoard();}};
+    $('track-tabs').onclick=e=>{const b=e.target.closest('[data-track]');if(b){boardState.track=b.dataset.track;boardState.category='';boardState.metric='both';boardState.dir=-1;initBoard(true);}};
     const cats=[...new Set(rowsInTrack().map(r=>r.category).filter(Boolean))];
     if(!cats.includes(boardState.category))boardState.category='';
     $('category-filter').innerHTML='<option value="">All categories</option>'+cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
@@ -82,10 +81,10 @@
     $('category-filter').onchange=e=>{boardState.category=e.target.value;renderBoard();};
     $('metric-filter').onchange=e=>{boardState.metric=e.target.value;boardState.dir=catalog.metrics[activeMetric()].higher?-1:1;renderBoard();};
     $('new-filter').onchange=e=>{boardState.onlyNew=e.target.checked;renderBoard();};
-    $('reset-board').onclick=()=>{boardState.query='';boardState.category='';boardState.onlyNew=false;initBoard();};
+    $('reset-board').onclick=()=>{boardState.query='';boardState.category='';boardState.onlyNew=false;initBoard(true);};
     $('download-csv').onclick=downloadCsv;
     $('update-details').innerHTML=`<p><strong>${esc(catalog.updated)}</strong> · Added ${catalog.updates.newRows} result rows from original papers, including ${catalog.updates.newMethods.map(esc).join(', ')}. WeatherBench baseline rows are attributed to ClusIR’s comparison table.</p><p>${catalog.updates.corrections.map(esc).join(' ')}</p><p>${catalog.updates.excluded.map(esc).join(' ')}</p>`;
-    renderBoard();
+    renderBoard(persistUrl);
   }
   function updateUrl() {
     const p=new URLSearchParams({benchmark:boardState.group});
@@ -96,14 +95,14 @@
     if(boardState.onlyNew)p.set('new','1');
     if(boardState.sort!=='avg')p.set('sort',boardState.sort);
     if(boardState.dir===1)p.set('dir','asc');
-    history.replaceState(null,'','?'+p.toString()+location.hash);
+    history.replaceState(null,'','?'+p.toString()+'#leaderboard');
   }
   function valueOf(row,key) {
     if(key==='method')return row.method;
     if(key==='params') {const nums=String(row.params).match(/\d+(?:\.\d+)?/g);return nums?nums.reduce((n,x)=>n+Number(x),0):null;}
     return row.scores[key]?.[metricIndex()] ?? null;
   }
-  function renderBoard() {
+  function renderBoard(persistUrl = true) {
     const g=group(),q=boardState.query.toLowerCase().trim();
     visibleRows=rowsInTrack().filter(r=>(!boardState.category || r.category===boardState.category) && (!boardState.onlyNew || r.added) && (!q || `${r.method} ${r.venue} ${r.approach}`.toLowerCase().includes(q)));
     visibleRows.sort((a,b)=>{const av=valueOf(a,boardState.sort),bv=valueOf(b,boardState.sort);if(av===null)return bv===null?0:1;if(bv===null)return -1;return boardState.dir*(typeof av==='string'?av.localeCompare(bv):av-bv)||a.method.localeCompare(b.method);});
@@ -130,7 +129,7 @@
     $('leaderboard-table').querySelector('tbody').onclick=e=>{const b=e.target.closest('[data-row]');if(b)showMethod(g.rows.find(r=>r.id===b.dataset.row));};
     $('table-caption').textContent=`${g.title}${g.tracks?' — '+g.tracks.find(t=>t.id===boardState.track).label:''}. ${boardState.metric==='both'?'PSNR in dB / SSIM':metric.label}. Sorted by ${boardState.sort} ${boardState.dir===-1?'descending':'ascending'}.`;
     $('empty-board').hidden=visibleRows.length!==0;
-    updateUrl();
+    if (persistUrl) updateUrl();
   }
   function showMethod(r) {
     const matched=catalog.papers.find(p=>p.code && p.code===r.code || p.paper && p.paper===r.paper);
@@ -150,6 +149,21 @@
 
   if(!catalog){$('data-status').textContent='Data unavailable — please use the GitHub source.';return;}
   common();
+  const sectionLinks = document.querySelectorAll('nav [data-section]');
+  const setSection = id => sectionLinks.forEach(a => {
+    const active = a.dataset.section === id;
+    a.classList.toggle('active', active);
+    if (active) a.setAttribute('aria-current', 'location');
+    else a.removeAttribute('aria-current');
+  });
+  sectionLinks.forEach(a => a.addEventListener('click', () => setSection(a.dataset.section)));
+  if (location.hash === '#leaderboard') setSection('leaderboard');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) setSection(entry.target.id); });
+    }, { rootMargin: '-90px 0px -55% 0px' });
+    ['library', 'leaderboard'].forEach(id => observer.observe($(id)));
+  }
   // A local snapshot keeps Pages usable offline. New source data replaces it only when changed.
   const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),6500);
   fetch('https://raw.githubusercontent.com/Harbinzzy/All-in-One-Image-Restoration-Survey/main/data/catalog.json',{signal:controller.signal,cache:'no-cache'})
