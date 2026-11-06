@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&amp;family=Noto+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20261106-plug-and-play">
   <script src="app.js" defer></script>
   <title>UDPNet | Depth-guided Image Dehazing</title>
 </head>
@@ -53,7 +53,7 @@
     </header>
 
     <section class="teaser container" aria-label="Dehazing across diverse scenes">
-      <p class="teaser-intro"><strong>Depth as a structural prior.</strong> One framework, diverse hazy scenes.</p>
+      <p class="teaser-intro"><strong>Plug-and-play depth priors.</strong> Boosting image dehazing across backbones and diverse hazy scenes.</p>
       <div class="tabs scene-tabs" role="tablist" aria-label="Example scenes">
         <button id="scene-day-tab" role="tab" aria-selected="true" aria-controls="scene-day" tabindex="0">Daytime</button>
         <button id="scene-real-tab" role="tab" aria-selected="false" aria-controls="scene-real" tabindex="-1">Real-world</button>
@@ -168,8 +168,8 @@
       <figure><button class="figure-zoom" aria-label="Enlarge the depth-prior reliability analysis"><img src="assets/depth-reliability.webp" width="2400" height="817" alt="Depth maps estimated from hazy and clear images, their absolute errors, and restoration results across outdoor, real-world and nighttime scenes" loading="lazy"></button><figcaption>Depth-prior reliability on SOTS-Outdoor, NH-HAZE, and NHR. Relative-depth estimates retain global layout and major boundaries under haze, while local deviations remain.</figcaption></figure>
       <div class="text-container analysis-copy"><p>UDPNet uses depth as an adaptive structural cue. DGAM and DPFM learn how to combine it with RGB features rather than directly imposing the estimated depth on the reconstruction.</p></div>
       <figure><button class="figure-zoom" aria-label="Enlarge the DPFM feature visualization"><img src="assets/feature-fusion.webp" width="2200" height="1132" alt="Feature maps comparing RGB features, depth features and features after fusion with DPFM" loading="lazy"></button><figcaption>Feature visualization of the Depth Prior Fusion Module.</figcaption></figure>
-      <details class="efficiency">
-        <summary>Depth estimator and inference cost</summary>
+      <section class="efficiency" aria-labelledby="efficiency-heading">
+        <h3 id="efficiency-heading">Depth estimator and inference cost</h3>
         <p>The depth estimator is frozen but remains part of inference. On Haze4K, the FSNet restoration network grows from 13.28M to 13.60M parameters; the external DepthAnything V2 model adds its own parameters and computation. The following end-to-end measurements use an RTX 3080 Ti.</p>
         <div class="table-scroll" role="region" aria-label="Depth estimator cost comparison" tabindex="0"><table><caption>DepthAnything V2 performance–cost trade-off on Haze4K</caption><thead><tr><th scope="col">Prior</th><th scope="col">Restoration + prior (M)</th><th scope="col">PSNR ↑</th><th scope="col">GFLOPs</th><th scope="col">Memory (GiB)</th><th scope="col">Time (ms)</th></tr></thead><tbody>
           <tr><th scope="row">RGB baseline</th><td>13.28 + 0</td><td>34.12</td><td>107.59</td><td>0.37</td><td>71.58</td></tr>
@@ -177,7 +177,7 @@
           <tr><th scope="row">DA2-Base</th><td>13.60 + 97.5</td><td>34.87</td><td>166.69</td><td>1.14</td><td>106.36</td></tr>
           <tr class="ours"><th scope="row">DA2-Large</th><td>13.60 + 335.3</td><td>35.31</td><td>277.56</td><td>2.03</td><td>135.39</td></tr>
         </tbody></table></div>
-      </details>
+      </section>
     </section>
 
     <section id="bibtex" class="section section-tint">
