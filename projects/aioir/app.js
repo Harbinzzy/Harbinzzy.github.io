@@ -8,13 +8,12 @@
   let catalog = window.AIOIR_CATALOG;
   let paperState = {year:'', query:'', venue:'', code:false, page:1};
   const params = new URLSearchParams(location.search);
-  let boardState = {group:params.get('benchmark') || 'three',track:params.get('track') || 'weatherstream',metric:params.get('metric') || 'both',category:params.get('category') ?? 'All-in-One',query:params.get('q') || '',onlyNew:params.get('new') === '1',sort:params.get('sort') || 'avg',dir:params.get('dir') === 'asc' ? 1 : -1};
+  let boardState = {group:params.get('benchmark') || 'three',track:params.get('track') || 'weatherstream',metric:params.get('metric') || 'both',category:params.get('category') ?? 'All-in-One',query:params.get('q') || '',sort:params.get('sort') || 'avg',dir:params.get('dir') === 'asc' ? 1 : -1};
   let visibleRows = [];
 
   function common() {
     document.querySelectorAll('[data-stat="papers"]').forEach(e => e.textContent = catalog.papers.length);
     document.querySelectorAll('[data-stat="results"]').forEach(e => e.textContent = catalog.benchmarks.reduce((sum,b) => sum+b.rows.length,0));
-    $('data-status').textContent = 'Data updated ' + new Date(catalog.updated+'T12:00:00Z').toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'});
     initPapers();
     initBoard();
   }
@@ -76,14 +75,11 @@
     $('metric-filter').innerHTML='<option value="both">PSNR / SSIM</option><option value="psnr">PSNR</option><option value="ssim">SSIM</option>'+(hasLpips?'<option value="lpips">LPIPS ↓</option>':'');
     $('metric-filter').value=boardState.metric;
     $('method-search').value=boardState.query;
-    $('new-filter').checked=boardState.onlyNew;
     $('method-search').oninput=e=>{boardState.query=e.target.value;renderBoard();};
     $('category-filter').onchange=e=>{boardState.category=e.target.value;renderBoard();};
     $('metric-filter').onchange=e=>{boardState.metric=e.target.value;boardState.dir=catalog.metrics[activeMetric()].higher?-1:1;renderBoard();};
-    $('new-filter').onchange=e=>{boardState.onlyNew=e.target.checked;renderBoard();};
-    $('reset-board').onclick=()=>{boardState.query='';boardState.category='';boardState.onlyNew=false;initBoard(true);};
+    $('reset-board').onclick=()=>{boardState.query='';boardState.category='';initBoard(true);};
     $('download-csv').onclick=downloadCsv;
-    $('update-details').innerHTML=`<p><strong>${esc(catalog.updated)}</strong> · Added ${catalog.updates.newRows} result rows from original papers, including ${catalog.updates.newMethods.map(esc).join(', ')}. WeatherBench baseline rows are attributed to ClusIR’s comparison table.</p><p>${catalog.updates.corrections.map(esc).join(' ')}</p><p>${catalog.updates.excluded.map(esc).join(' ')}</p>`;
     renderBoard(persistUrl);
   }
   function updateUrl() {
@@ -92,7 +88,6 @@
     if(boardState.metric!=='both')p.set('metric',boardState.metric);
     p.set('category',boardState.category);
     if(boardState.query)p.set('q',boardState.query);
-    if(boardState.onlyNew)p.set('new','1');
     if(boardState.sort!=='avg')p.set('sort',boardState.sort);
     if(boardState.dir===1)p.set('dir','asc');
     history.replaceState(null,'','?'+p.toString()+'#leaderboard');
@@ -104,7 +99,7 @@
   }
   function renderBoard(persistUrl = true) {
     const g=group(),q=boardState.query.toLowerCase().trim();
-    visibleRows=rowsInTrack().filter(r=>(!boardState.category || r.category===boardState.category) && (!boardState.onlyNew || r.added) && (!q || `${r.method} ${r.venue} ${r.approach}`.toLowerCase().includes(q)));
+    visibleRows=rowsInTrack().filter(r=>(!boardState.category || r.category===boardState.category) && (!q || `${r.method} ${r.venue} ${r.approach}`.toLowerCase().includes(q)));
     visibleRows.sort((a,b)=>{const av=valueOf(a,boardState.sort),bv=valueOf(b,boardState.sort);if(av===null)return bv===null?0:1;if(bv===null)return -1;return boardState.dir*(typeof av==='string'?av.localeCompare(bv):av-bv)||a.method.localeCompare(b.method);});
     const metric=catalog.metrics[activeMetric()];
     $('board-status').textContent=`${visibleRows.length} / ${rowsInTrack().length} results · Ranked within this selection`;
@@ -119,12 +114,12 @@
     let rank=0,last=null;
     $('leaderboard-table').querySelector('tbody').innerHTML=visibleRows.map((r,i)=>{
       const v=valueOf(r,boardState.sort);if(v!==last || i===0)rank=i+1;last=v;
-      return `<tr><td class="method-cell"><div><span class="rank ${rank<=3?'top':''}">${rank}</span><div><button type="button" class="method-button" data-row="${r.id}">${esc(r.method)} ${r.added?'<span class="new-badge">NEW</span>':''}${r.corrected?'<span class="corrected-badge" title="Corrected against original paper"> †</span>':''}<span class="method-venue">${esc(r.venue || r.category || 'Reported result')}</span></button></div></div></td>${g.columns.map(c=>{
+      return `<tr><td class="method-cell"><div><span class="rank ${rank<=3?'top':''}">${rank}</span><div><button type="button" class="method-button" data-row="${r.id}">${esc(r.method)}<span class="method-venue">${esc(r.venue || r.category || '')}</span></button></div></div></td>${g.columns.map(c=>{
         const pair=r.scores[c.id],v=pair?.[metricIndex()];
         let label='—';
         if(v!==undefined&&v!==null){label=boardState.metric==='both'?`${pair[0].toFixed(2)}<span class="metric-divider">/</span><span class="metric-sub">${pair[1].toFixed(4).replace(/0$/,'')}</span>`:v.toFixed(metric.digits);}
         return `<td class="${c.id==='avg'?'avg-cell':''}"><span class="metric-value ${v!==undefined && v===best[c.id]?'best':''}">${label}</span></td>`;
-      }).join('')}<td class="params-cell">${esc(String(r.params).replace(/M/g,''))}</td></tr>`;
+      }).join('')}<td class="params-cell">${esc(String(r.params).replace('M*','M (restoration)').replace(/M/g,''))}</td></tr>`;
     }).join('');
     $('leaderboard-table').querySelector('tbody').onclick=e=>{const b=e.target.closest('[data-row]');if(b)showMethod(g.rows.find(r=>r.id===b.dataset.row));};
     $('table-caption').textContent=`${g.title}${g.tracks?' — '+g.tracks.find(t=>t.id===boardState.track).label:''}. ${boardState.metric==='both'?'PSNR in dB / SSIM':metric.label}. Sorted by ${boardState.sort} ${boardState.dir===-1?'descending':'ascending'}.`;
@@ -133,21 +128,21 @@
   }
   function showMethod(r) {
     const matched=catalog.papers.find(p=>p.code && p.code===r.code || p.paper && p.paper===r.paper);
-    $('method-details').innerHTML=`<p class="dialog-kicker">RESULT PROVENANCE ${r.added?' / NEW ADDITION':''}</p><h2>${esc(r.method)}</h2><p class="detail-meta">${[r.venue,r.category,r.params+' parameters'].filter(Boolean).map(esc).join(' · ')}</p>${matched?`<p>${esc(matched.title)}</p>`:''}<p class="detail-note">${esc(r.note)}</p>${r.approach?`<p class="detail-meta">Approach: ${esc(r.approach)}</p>`:''}<div class="resource-links">${link(r.source,esc(r.sourceLabel)+' ↗')}${link(r.paper,'Paper ↗')}${link(r.code,'Code ↗')}</div><p class="detail-source">Source: ${link(r.source,esc(r.source))}</p>`;
+    $('method-details').innerHTML=`<p class="dialog-kicker">METHOD DETAILS</p><h2>${esc(r.method)}</h2><p class="detail-meta">${[r.venue,r.category,r.params.replace('M*','M (restoration)')+' parameters'].filter(Boolean).map(esc).join(' · ')}</p>${matched?`<p>${esc(matched.title)}</p>`:''}${r.approach?`<p class="detail-meta">Approach: ${esc(r.approach)}</p>`:''}<div class="resource-links">${link(r.paper,'Paper ↗')}${link(r.code,'Code ↗')}</div>`;
     $('method-dialog').showModal();
   }
   function csvEscape(v) {let s=String(v??'');if(/^[=+@\-]/.test(s))s="'"+s;return '"'+s.replace(/"/g,'""')+'"';}
   function downloadCsv() {
     const g=group(),ids=boardState.metric==='both'?[0,1]:[metricIndex()];
     const metrics=['PSNR','SSIM','LPIPS'];
-    const header=['Method','Category','Venue','Params',...g.columns.flatMap(c=>ids.map(i=>c.label+' '+metrics[i])),'Source','Source table','Notes','Added'];
-    const rows=visibleRows.map(r=>[r.method,r.category,r.venue,r.params,...g.columns.flatMap(c=>ids.map(i=>r.scores[c.id]?.[i]??'')),r.source,r.sourceLabel,r.note,r.added]);
+    const header=['Method','Category','Venue','Params',...g.columns.flatMap(c=>ids.map(i=>c.label+' '+metrics[i]))];
+    const rows=visibleRows.map(r=>[r.method,r.category,r.venue,r.params.replace('M*','M (restoration)'),...g.columns.flatMap(c=>ids.map(i=>r.scores[c.id]?.[i]??''))]);
     const csv='\ufeff'+[header,...rows].map(row=>row.map(csvEscape).join(',')).join('\r\n');
     const a=document.createElement('a'),url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));
     a.href=url;a.download=`aioir-${g.id}${g.tracks?'-'+boardState.track:''}-${catalog.updated}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   }
 
-  if(!catalog){$('data-status').textContent='Data unavailable — please use the GitHub source.';return;}
+  if(!catalog){$('paper-status').textContent=$('board-status').textContent='Data unavailable. Please reload the page.';return;}
   common();
   const sectionLinks = document.querySelectorAll('nav [data-section]');
   const setSection = id => sectionLinks.forEach(a => {
