@@ -1214,12 +1214,19 @@ a:focus-visible {
 .citation-placeholder {
   padding: 30px 34px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
   border: 1px solid var(--line);
   border-radius: 16px;
   background: var(--surface);
+}
+
+.citation-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
 }
 
 .citation-placeholder p {
@@ -1230,6 +1237,22 @@ a:focus-visible {
 .citation-placeholder a {
   color: var(--accent-dark);
   font-weight: 750;
+}
+
+.citation-placeholder pre {
+  margin: 0;
+  padding: 22px 24px;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--text);
+  font: 500 0.9rem/1.65 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  white-space: pre;
+}
+
+.citation-placeholder code {
+  font: inherit;
 }
 
 .project-footer,
@@ -1552,7 +1575,7 @@ a:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  .citation-placeholder,
+  .citation-links,
   .project-footer,
   .site-footer {
     align-items: flex-start;
