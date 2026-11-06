@@ -512,12 +512,15 @@
           <p>Read the <a href="https://arxiv.org/pdf/2610.17141">paper on arXiv</a>.</p>
           <a href="https://github.com/PKU-VaLuE-Lab/MARS">View the repository →</a>
         </div>
-        <pre><code>@article{zuo2026mars,
+        <div class="citation-code">
+          <button class="copy-citation" type="button" data-copy-citation aria-label="Copy BibTeX citation" aria-live="polite">Copy</button>
+          <pre><code id="mars-bibtex">@article{zuo2026mars,
   title={{MARS}: Systematic Multi-Level Acceleration for World Action Models},
   author={Zuo, Zengyuan and Zhang, Yongchang and Zhao, Guangyu and Zhang, Tianze and Wu, Biao and Fang, Meng and Zhong, Yiwu},
   journal={arXiv preprint arXiv:2610.17141},
   year={2026}
 }</code></pre>
+        </div>
       </div>
     </section>
   </main>
@@ -533,5 +536,36 @@
       <a href="#main-content">Back to top ↑</a>
     </div>
   </footer>
+  <script>
+    const copyCitationButton = document.querySelector("[data-copy-citation]");
+    const citationText = document.getElementById("mars-bibtex");
+
+    copyCitationButton?.addEventListener("click", async () => {
+      try {
+        const text = citationText.textContent;
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const textArea = document.createElement("textarea");
+          textArea.value = text;
+          textArea.setAttribute("readonly", "");
+          textArea.style.position = "fixed";
+          textArea.style.opacity = "0";
+          document.body.appendChild(textArea);
+          textArea.select();
+          document.execCommand("copy");
+          textArea.remove();
+        }
+        copyCitationButton.textContent = "Copied";
+        copyCitationButton.classList.add("is-copied");
+        window.setTimeout(() => {
+          copyCitationButton.textContent = "Copy";
+          copyCitationButton.classList.remove("is-copied");
+        }, 1800);
+      } catch {
+        copyCitationButton.textContent = "Copy failed";
+      }
+    });
+  </script>
 </body>
 </html>

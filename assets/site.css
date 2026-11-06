@@ -1239,9 +1239,13 @@ a:focus-visible {
   font-weight: 750;
 }
 
+.citation-code {
+  position: relative;
+}
+
 .citation-placeholder pre {
   margin: 0;
-  padding: 22px 24px;
+  padding: 54px 24px 22px;
   overflow-x: auto;
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -1253,6 +1257,37 @@ a:focus-visible {
 
 .citation-placeholder code {
   font: inherit;
+}
+
+.copy-citation {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  right: 12px;
+  padding: 7px 13px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--accent-dark);
+  background: var(--surface);
+  font: 700 0.8rem/1 var(--font-body);
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.copy-citation:hover {
+  border-color: var(--accent);
+  background: var(--surface-strong);
+}
+
+.copy-citation.is-copied {
+  border-color: var(--accent);
+  color: var(--white);
+  background: var(--accent);
+}
+
+.copy-citation:focus-visible {
+  outline: 3px solid rgba(32, 201, 239, 0.55);
+  outline-offset: 2px;
 }
 
 .project-footer,
