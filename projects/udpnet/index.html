@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="UDPNet integrates reliable depth priors with image features for robust dehazing across daytime, nighttime, real-world and remote-sensing scenes.">
+  <meta name="author" content="Zengyuan Zuo, Junjun Jiang, Gang Wu, Xianming Liu">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:title" content="UDPNet: Unleashing Depth-based Priors for Robust Image Dehazing">
+  <meta property="og:description" content="A general depth-guided framework for robust image dehazing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://harbinzzy.github.io/projects/udpnet/">
+  <meta property="og:image" content="https://harbinzzy.github.io/projects/udpnet/assets/framework.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="citation_title" content="UDPNet: Unleashing Depth-based Priors for Robust Image Dehazing">
+  <meta name="citation_author" content="Zuo, Zengyuan">
+  <meta name="citation_author" content="Jiang, Junjun">
+  <meta name="citation_author" content="Wu, Gang">
+  <meta name="citation_author" content="Liu, Xianming">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2601.06909">
+  <link rel="canonical" href="https://harbinzzy.github.io/projects/udpnet/">
+  <link rel="icon" href="../../assets/home/profile.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&amp;family=Noto+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+  <title>UDPNet | Depth-guided Image Dehazing</title>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <nav class="top-nav" aria-label="Page navigation">
+    <a href="../../" class="home-link" aria-label="Zengyuan Zuo’s homepage"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/></svg></a>
+    <a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#results">Results</a><a href="#bibtex">BibTeX</a>
+  </nav>
+  <main id="main">
+    <header class="hero container">
+      <h1><span class="paper-name">UDPNet</span>: Unleashing Depth-based Priors<br class="desktop-break"> for Robust Image Dehazing</h1>
+      <div class="authors">
+        <a href="https://harbinzzy.github.io/">Zengyuan Zuo</a>,
+        <a href="https://homepage.hit.edu.cn/jiangjunjun">Junjun Jiang<sup>✉</sup></a>,
+        <a href="https://me.csgwu.site/">Gang Wu</a>,
+        <a href="https://homepage.hit.edu.cn/xmliu">Xianming Liu</a>
+      </div>
+      <p class="affiliation">School of Computer Science and Technology, Harbin Institute of Technology</p>
+      <p class="publication-status">arXiv preprint, 2026 · Under review at IEEE TIP</p>
+      <div class="resource-links">
+        <a class="resource" href="https://arxiv.org/pdf/2601.06909"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h8l4 4v16H6Z"/><path d="M14 2v5h4M9 12h6M9 16h6"/></svg>Paper</a>
+        <a class="resource" href="https://arxiv.org/abs/2601.06909"><span class="arxiv-icon" aria-hidden="true">χ</span>arXiv</a>
+        <a class="resource" href="https://github.com/Harbinzzy/UDPNet"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2-6-2m12 5v-3.4c0-1 .1-1.5-.5-2.1 3.2-.4 6.5-1.6 6.5-7.1a5.5 5.5 0 0 0-1.5-3.8 5 5 0 0 0-.1-3.8S18.2 1.4 15 3a13 13 0 0 0-6 0C5.8 1.4 4.6 1.8 4.6 1.8a5 5 0 0 0-.1 3.8A5.5 5.5 0 0 0 3 9.4c0 5.5 3.3 6.7 6.5 7.1-.6.6-.6 1.2-.5 2.1V22"/></svg>Code</a>
+      </div>
+    </header>
+
+    <section class="teaser container" aria-label="Dehazing across diverse scenes">
+      <p class="teaser-intro"><strong>Depth as a structural prior.</strong> One framework, diverse hazy scenes.</p>
+      <div class="tabs scene-tabs" role="tablist" aria-label="Example scenes">
+        <button id="scene-day-tab" role="tab" aria-selected="true" aria-controls="scene-day" tabindex="0">Daytime</button>
+        <button id="scene-real-tab" role="tab" aria-selected="false" aria-controls="scene-real" tabindex="-1">Real-world</button>
+        <button id="scene-night-tab" role="tab" aria-selected="false" aria-controls="scene-night" tabindex="-1">Nighttime</button>
+        <button id="scene-remote-tab" role="tab" aria-selected="false" aria-controls="scene-remote" tabindex="-1">Remote sensing</button>
+      </div>
+      <div id="scene-day" class="scene-panel" role="tabpanel" aria-labelledby="scene-day-tab">
+        <figure><button class="figure-zoom" aria-label="Enlarge daytime dehazing comparison"><img src="assets/teaser-daytime.webp" width="2724" height="570" alt="Daytime comparison of the hazy input, DCMPNet, UDPNet and ground truth" fetchpriority="high"></button></figure>
+      </div>
+      <div id="scene-real" class="scene-panel" role="tabpanel" aria-labelledby="scene-real-tab" hidden>
+        <figure><button class="figure-zoom" aria-label="Enlarge real-world dehazing comparison"><img src="assets/teaser-real-world.webp" width="2724" height="561" alt="Real-world scene comparing the hazy input, a competing dehazing model, UDPNet and ground truth" loading="lazy"></button></figure>
+      </div>
+      <div id="scene-night" class="scene-panel" role="tabpanel" aria-labelledby="scene-night-tab" hidden>
+        <figure><button class="figure-zoom" aria-label="Enlarge nighttime dehazing comparison"><img src="assets/teaser-nighttime.webp" width="2724" height="601" alt="Nighttime scene comparing the hazy input, a competing dehazing model, UDPNet and ground truth" loading="lazy"></button></figure>
+      </div>
+      <div id="scene-remote" class="scene-panel" role="tabpanel" aria-labelledby="scene-remote-tab" hidden>
+        <figure><button class="figure-zoom" aria-label="Enlarge remote-sensing dehazing comparison"><img src="assets/teaser-remote-sensing.webp" width="2724" height="735" alt="Remote-sensing comparison of the hazy input, a competing dehazing model, UDPNet and ground truth" loading="lazy"></button></figure>
+      </div>
+      <p class="figure-hint">Click any figure to view it at full resolution.</p>
+      <div class="gains" aria-label="PSNR gains over FSNet">
+        <div><strong>+0.85 <span>dB</span></strong><span>SOTS-Indoor</span></div>
+        <div><strong>+1.19 <span>dB</span></strong><span>Haze4K</span></div>
+        <div><strong>+1.79 <span>dB</span></strong><span>NHR</span></div>
+      </div>
+      <p class="gains-note">PSNR improvements of FSNet + UDP over the original FSNet.</p>
+    </section>
+
+    <section id="abstract" class="section section-tint">
+      <div class="text-container">
+        <h2>Abstract</h2>
+        <p>Image dehazing has witnessed significant advancements with the development of deep learning models. However, most existing methods focus solely on single-modal RGB features, neglecting the inherent correlation between scene depth and haze distribution. Even methods that leverage depth estimation to assist dehazing often suffer from suboptimal performance due to insufficient exploitation of reliable depth information.</p>
+        <p>We present <strong>UDPNet</strong>, a general framework that leverages depth-based priors from the large-scale pretrained depth estimation model <strong>DepthAnything V2</strong> to boost existing image dehazing models. The <strong>Depth-Guided Attention Module (DGAM)</strong> adaptively modulates features via lightweight depth-guided channel attention, while the <strong>Depth Prior Fusion Module (DPFM)</strong> enables hierarchical fusion of multi-scale depth features through dual sliding-window multi-head cross-attention. These components integrate depth priors into the restoration network and help it adapt to varying haze densities, illumination conditions, and domain gaps across synthetic and real-world data.</p>
+        <p>Extensive experiments demonstrate improvements across daytime, nighttime, real-world, and remote-sensing dehazing. UDPNet improves FSNet by <strong>0.85 dB on SOTS-Indoor, 1.19 dB on Haze4K, and 1.79 dB on NHR</strong>, and also extends to five-task all-in-one image restoration.</p>
+      </div>
+    </section>
+
+    <section id="method" class="section container">
+      <h2>Depth-guided Restoration</h2>
+      <p class="section-lead">From relative depth to adaptive attention and multi-scale feature fusion.</p>
+      <figure>
+        <button class="figure-zoom" aria-label="Enlarge the UDPNet framework"><img src="assets/framework.webp" width="2600" height="1240" alt="UDPNet architecture: a frozen DepthAnything V2 estimator provides depth priors to DGAM and the hierarchical DPFM modules in an encoder-decoder restoration network" loading="lazy"></button>
+        <figcaption>Overview of UDPNet. Depth priors guide feature modulation and interact with RGB features throughout the multi-scale encoder.</figcaption>
+      </figure>
+      <div class="method-points">
+        <div><span class="step">01</span><h3>Extract structural priors</h3><p>A frozen DepthAnything V2 model estimates relative scene depth from the hazy image, providing complementary geometry cues.</p></div>
+        <div><span class="step">02</span><h3>Adapt with DGAM</h3><p>Depth-guided channel attention adaptively modulates features to account for the relation between scene structure and haze.</p></div>
+        <div><span class="step">03</span><h3>Fuse with DPFM</h3><p>Hierarchical cross-attention fuses depth and RGB features at multiple scales before the decoder reconstructs a clear image.</p></div>
+      </div>
+    </section>
+
+    <section id="results" class="section section-tint">
+      <div class="container">
+        <h2>Experimental Results</h2>
+        <p class="section-lead">From image dehazing to all-in-one restoration.</p>
+        <div class="tabs result-tabs" role="tablist" aria-label="Evaluation scenarios">
+          <button id="daytime-tab" role="tab" aria-selected="true" aria-controls="daytime" tabindex="0">Daytime</button>
+          <button id="nighttime-tab" role="tab" aria-selected="false" aria-controls="nighttime" tabindex="-1">Nighttime</button>
+          <button id="real-world-tab" role="tab" aria-selected="false" aria-controls="real-world" tabindex="-1">Real-world</button>
+          <button id="remote-sensing-tab" role="tab" aria-selected="false" aria-controls="remote-sensing" tabindex="-1">Remote sensing</button>
+          <button id="all-in-one-tab" role="tab" aria-selected="false" aria-controls="all-in-one" tabindex="-1">All-in-one</button>
+        </div>
+        <p class="metric-note">PSNR (dB) ↑ · SSIM ↑ · LPIPS ↓ <span>Higher is better for PSNR and SSIM; lower is better for LPIPS.</span></p>
+
+        <div id="daytime" class="result-panel" role="tabpanel" aria-labelledby="daytime-tab" tabindex="0">
+          <p class="result-intro">FSNet + UDP reaches <strong>43.30 dB</strong> on SOTS-Indoor and <strong>35.31 dB</strong> on Haze4K.</p>
+          <!-- TABLE:daytime -->
+<div class="table-grid"><div class="table-card"><h3>SOTS</h3><div class="table-scroll" role="region" tabindex="0" aria-label="SOTS results"><table><thead><tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">SOTS-Indoor</th><th scope="colgroup" colspan="2">SOTS-Outdoor</th></tr><tr><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th></tr></thead><tbody><tr><th scope="row">DCP</th><td>16.61</td><td>0.855</td><td>19.14</td><td>0.861</td></tr><tr><th scope="row">FFA-Net</th><td>36.39</td><td>0.989</td><td>33.57</td><td>0.984</td></tr><tr><th scope="row">AECR-Net</th><td>37.17</td><td>0.990</td><td>—</td><td>—</td></tr><tr><th scope="row">DeHamer</th><td>36.63</td><td>0.988</td><td>35.18</td><td>0.986</td></tr><tr><th scope="row">DehazeFormer-L</th><td>40.05</td><td>0.996</td><td>—</td><td>—</td></tr><tr><th scope="row">FSNet</th><td>42.45</td><td class="best">0.997</td><td>40.40</td><td class="best">0.997</td></tr><tr><th scope="row">MB-TaylorFormer-L</th><td>42.64</td><td>0.994</td><td>38.09</td><td>0.991</td></tr><tr><th scope="row">FocalNet</th><td>40.82</td><td>0.996</td><td>37.71</td><td>0.995</td></tr><tr><th scope="row">C2PNet</th><td>42.56</td><td>0.995</td><td>36.68</td><td>0.990</td></tr><tr><th scope="row">DEA-Net-CR</th><td>41.31</td><td>0.995</td><td>36.59</td><td>0.990</td></tr><tr><th scope="row">DCMPNet</th><td>42.18</td><td class="best">0.997</td><td>36.56</td><td>0.993</td></tr><tr><th scope="row">GridFormer</th><td>42.34</td><td>0.994</td><td>—</td><td>—</td></tr><tr><th scope="row">ConvIR-B</th><td>42.72</td><td class="best">0.997</td><td>39.42</td><td>0.996</td></tr><tr><th scope="row">SFMN</th><td>41.44</td><td>0.995</td><td>37.72</td><td>0.991</td></tr><tr><th scope="row">PoolNet-B</th><td>42.01</td><td class="best">0.997</td><td>—</td><td>—</td></tr><tr><th scope="row">PGH2Net</th><td>41.70</td><td>0.996</td><td>37.52</td><td>0.989</td></tr><tr><th scope="row">MB-TaylorFormerV2-L</th><td>42.84</td><td>0.995</td><td>39.25</td><td>0.992</td></tr><tr class="ours"><th scope="row">ConvIR + UDP</th><td>43.12</td><td class="best">0.997</td><td>40.32</td><td>0.996</td></tr><tr class="ours"><th scope="row">FSNet + UDP</th><td class="best">43.30</td><td class="best">0.997</td><td class="best">40.53</td><td class="best">0.997</td></tr></tbody></table></div><p class="scroll-hint">Scroll to explore the table · UDP variants shaded in blue</p></div><div class="table-card"><h3>Haze4K</h3><div class="table-scroll" role="region" tabindex="0" aria-label="Haze4K results"><table><thead><tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">Haze4K</th></tr><tr><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th></tr></thead><tbody><tr><th scope="row">DehazeNet</th><td>19.12</td><td>0.84</td></tr><tr><th scope="row">GridDehazeNet</th><td>23.29</td><td>0.93</td></tr><tr><th scope="row">FFA-Net</th><td>26.96</td><td>0.95</td></tr><tr><th scope="row">DMT-Net</th><td>28.53</td><td>0.96</td></tr><tr><th scope="row">PMNet</th><td>33.49</td><td>0.98</td></tr><tr><th scope="row">MB-TaylorFormer-L</th><td>34.47</td><td class="best">0.99</td></tr><tr><th scope="row">FSNet</th><td>34.12</td><td class="best">0.99</td></tr><tr><th scope="row">GridFormer</th><td>33.27</td><td class="best">0.99</td></tr><tr><th scope="row">ConvIR-B</th><td>34.15</td><td class="best">0.99</td></tr><tr><th scope="row">DEA-Net-CR</th><td>34.25</td><td class="best">0.99</td></tr><tr><th scope="row">MB-TaylorFormerV2-B</th><td>34.92</td><td class="best">0.99</td></tr><tr class="ours"><th scope="row">ConvIR + UDP</th><td>34.82</td><td class="best">0.99</td></tr><tr class="ours"><th scope="row">FSNet + UDP</th><td class="best">35.31</td><td class="best">0.99</td></tr></tbody></table></div><p class="scroll-hint">Scroll to explore the table · UDP variants shaded in blue</p></div></div>
+          <!-- END TABLE:daytime -->
+          <figure><button class="figure-zoom" aria-label="Enlarge SOTS visual comparisons"><img src="assets/sots.webp" width="3000" height="699" alt="Visual comparisons on SOTS-Indoor and SOTS-Outdoor, with magnified regions and ground truth" loading="lazy"></button><figcaption>Qualitative comparisons on SOTS-Indoor (top) and SOTS-Outdoor (bottom).</figcaption></figure>
+          <figure><button class="figure-zoom" aria-label="Enlarge Haze4K visual comparisons"><img src="assets/haze4k.webp" width="2373" height="610" alt="Haze4K visual comparisons with hazy input, competing methods, UDP variants and ground truth" loading="lazy"></button><figcaption>Qualitative comparisons on Haze4K.</figcaption></figure>
+        </div>
+
+        <div id="nighttime" class="result-panel" role="tabpanel" aria-labelledby="nighttime-tab" tabindex="0" hidden>
+          <p class="result-intro">Depth guidance improves restoration under non-uniform illumination. ConvIR + UDP reaches <strong>33.12 dB</strong> on GTA5 and <strong>29.54 dB</strong> on NHR.</p>
+          <!-- TABLE:nighttime -->
+<div class="table-grid"><div class="table-card"><h3>GTA5</h3><div class="table-scroll" role="region" tabindex="0" aria-label="GTA5 results"><table><thead><tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">GTA5</th></tr><tr><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th></tr></thead><tbody><tr><th scope="row">GS</th><td>21.02</td><td>0.639</td></tr><tr><th scope="row">MRP</th><td>20.92</td><td>0.646</td></tr><tr><th scope="row">Ancuti et al.</th><td>20.59</td><td>0.623</td></tr><tr><th scope="row">Yan et al.</th><td>27.00</td><td>0.850</td></tr><tr><th scope="row">CycleGAN</th><td>21.75</td><td>0.696</td></tr><tr><th scope="row">Jin et al.</th><td>30.38</td><td>0.904</td></tr><tr><th scope="row">ConvIR-B</th><td>31.83</td><td>0.921</td></tr><tr><th scope="row">PoolNet-B</th><td>31.53</td><td>0.921</td></tr><tr class="ours"><th scope="row">PoolNet + UDP</th><td>32.78</td><td>0.930</td></tr><tr class="ours"><th scope="row">ConvIR + UDP</th><td class="best">33.12</td><td class="best">0.933</td></tr></tbody></table></div><p class="scroll-hint">Scroll to explore the table · UDP variants shaded in blue</p></div><div class="table-card"><h3>NHR</h3><div class="table-scroll" role="region" tabindex="0" aria-label="NHR results"><table><thead><tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">NHR</th></tr><tr><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th></tr></thead><tbody><tr><th scope="row">NDIM</th><td>14.31</td><td>0.526</td></tr><tr><th scope="row">GS</th><td>17.32</td><td>0.629</td></tr><tr><th scope="row">MRPF</th><td>16.95</td><td>0.667</td></tr><tr><th scope="row">MRP</th><td>19.93</td><td>0.777</td></tr><tr><th scope="row">OSFD</th><td>21.32</td><td>0.804</td></tr><tr><th scope="row">HCD</th><td>23.43</td><td>0.953</td></tr><tr><th scope="row">FocalNet</th><td>25.35</td><td>0.969</td></tr><tr><th scope="row">Jin et al.</th><td>26.56</td><td>0.890</td></tr><tr><th scope="row">FSNet</th><td>26.30</td><td>0.976</td></tr><tr><th scope="row">ConvIR-B</th><td>29.49</td><td class="best">0.983</td></tr><tr><th scope="row">PoolNet-B</th><td>28.28</td><td>0.980</td></tr><tr class="ours"><th scope="row">FSNet + UDP</th><td>28.09</td><td>0.980</td></tr><tr class="ours"><th scope="row">ConvIR + UDP</th><td class="best">29.54</td><td class="best">0.983</td></tr></tbody></table></div><p class="scroll-hint">Scroll to explore the table · UDP variants shaded in blue</p></div></div>
+          <!-- END TABLE:nighttime -->
+          <figure><button class="figure-zoom" aria-label="Enlarge GTA5 visual comparisons"><img src="assets/gta5.webp" width="2800" height="797" alt="Nighttime image dehazing comparisons on GTA5" loading="lazy"></button><figcaption>Nighttime dehazing on GTA5.</figcaption></figure>
+          <figure><button class="figure-zoom" aria-label="Enlarge NHR visual comparisons"><img src="assets/nhr.webp" width="3000" height="767" alt="Nighttime image dehazing comparisons on NHR" loading="lazy"></button><figcaption>Nighttime dehazing on NHR.</figcaption></figure>
+        </div>
+
+        <div id="real-world" class="result-panel" role="tabpanel" aria-labelledby="real-world-tab" tabindex="0" hidden>
+          <p class="result-intro">Evaluation on four paired real-world benchmarks: <strong>Dense-Haze, NH-HAZE, O-HAZE, and I-HAZE</strong>.</p>
+          <!-- TABLE:real-world -->
+<div class="table-grid"><div class="table-card"><h3>Dense-Haze and NH-HAZE</h3><div class="table-scroll" role="region" tabindex="0" aria-label="Dense-Haze and NH-HAZE results"><table><thead><tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="3">Dense-Haze</th><th scope="colgroup" colspan="3">NH-HAZE</th></tr><tr><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">LPIPS ↓</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">LPIPS ↓</th></tr></thead><tbody><tr><th scope="row">DehazeNet</th><td>13.84</td><td>0.43</td><td>—</td><td>16.62</td><td>0.52</td><td>—</td></tr><tr><th scope="row">MSBDN</th><td>15.37</td><td>0.49</td><td>—</td><td>19.23</td><td>0.71</td><td>—</td></tr><tr><th scope="row">DeHamer</th><td>16.62</td><td>0.56</td><td>0.6346</td><td>20.66</td><td>0.68</td><td>0.3837</td></tr><tr><th scope="row">PMNet</th><td>16.79</td><td>0.51</td><td>—</td><td>20.42</td><td>0.73</td><td>—</td></tr><tr><th scope="row">MB-TaylorFormer-B</th><td>16.66</td><td>0.56</td><td>0.6125</td><td>—</td><td>—</td><td>—</td></tr><tr><th scope="row">C2PNet</th><td>16.88</td><td>0.57</td><td>—</td><td>20.24</td><td>0.69</td><td>—</td></tr><tr><th scope="row">FocalNet</th><td>17.07</td><td>0.63</td><td>0.6087</td><td>20.43</td><td>0.79</td><td>0.3780</td></tr><tr><th scope="row">SFNet</th><td>17.46</td><td>0.58</td><td class="best">0.5689</td><td>20.46</td><td>0.80</td><td>—</td></tr><tr><th scope="row">FSNet</th><td>17.13</td><td>0.65</td><td>0.5756</td><td>20.55</td><td>0.81</td><td>0.3624</td></tr><tr><th scope="row">ConvIR-S</th><td>17.45</td><td>0.65</td><td>0.6000</td><td>20.65</td><td>0.80</td><td>0.3669</td></tr><tr><th scope="row">PGH2Net</th><td>17.02</td><td>0.61</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr><th scope="row">MB-TaylorFormerV2-B</th><td>16.95</td><td>0.62</td><td>—</td><td>20.73</td><td>0.70</td><td>—</td></tr><tr class="ours"><th scope="row">ConvIR + UDP</th><td>17.55</td><td class="best">0.67</td><td>0.5813</td><td class="best">20.98</td><td class="best">0.82</td><td class="best">0.3567</td></tr><tr class="ours"><th scope="row">FSNet + UDP</th><td class="best">17.85</td><td>0.65</td><td>0.6033</td><td>20.94</td><td class="best">0.82</td><td>0.3732</td></tr></tbody></table></div><p class="scroll-hint">Scroll to explore the table · UDP variants shaded in blue</p></div><div class="table-card"><h3>O-HAZE and I-HAZE</h3><div class="table-scroll" role="region" tabindex="0" aria-label="O-HAZE and I-HAZE results"><table><thead><tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">O-HAZE</th><th scope="colgroup" colspan="2">I-HAZE</th></tr><tr><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th></tr></thead><tbody><tr><th scope="row">GridDehazeNet</th><td>18.92</td><td>0.67</td><td>18.73</td><td>0.77</td></tr><tr><th scope="row">MSBDN</th><td>24.36</td><td>0.75</td><td>19.62</td><td>0.62</td></tr><tr><th scope="row">FFA-Net</th><td>22.12</td><td>0.77</td><td>19.72</td><td>0.73</td></tr><tr><th scope="row">DeHamer</th><td>25.11</td><td>0.78</td><td>—</td><td>—</td></tr><tr><th scope="row">MB-TaylorFormer-B</th><td>25.05</td><td class="best">0.79</td><td>—</td><td>—</td></tr><tr><th scope="row">MB-TaylorFormer-L</th><td>25.31</td><td>0.78</td><td>—</td><td>—</td></tr><tr><th scope="row">ConvIR</th><td>25.36</td><td>0.78</td><td>22.44</td><td class="best">0.89</td></tr><tr class="ours"><th scope="row">ConvIR + UDP</th><td class="best">25.66</td><td class="best">0.79</td><td class="best">22.80</td><td class="best">0.89</td></tr></tbody></table></div><p class="scroll-hint">Scroll to explore the table · UDP variants shaded in blue</p></div></div>
+          <!-- END TABLE:real-world -->
+          <figure><button class="figure-zoom" aria-label="Enlarge Dense-Haze and NH-HAZE visual comparisons"><img src="assets/real-world.webp" width="3000" height="781" alt="Dehazing comparisons on Dense-Haze and NH-HAZE, showing residual haze and restored details" loading="lazy"></button><figcaption>Dense-Haze (top) and NH-HAZE (bottom).</figcaption></figure>
+          <figure><button class="figure-zoom" aria-label="Enlarge I-HAZE and O-HAZE visual comparisons"><img src="assets/ohaze-ihaze.webp" width="2200" height="909" alt="Paired real-world image restoration comparisons on I-HAZE and O-HAZE" loading="lazy"></button><figcaption>I-HAZE (top) and O-HAZE (bottom).</figcaption></figure>
+        </div>
+
+        <div id="remote-sensing" class="result-panel" role="tabpanel" aria-labelledby="remote-sensing-tab" tabindex="0" hidden>
+          <p class="result-intro">On SateHaze1k, PoolNet + UDP achieves <strong>26.20 / 28.26 / 23.13 dB</strong> across the thin, moderate, and thick haze subsets.</p>
+          <!-- TABLE:remote-sensing -->
+<div class="table-grid single"><div class="table-card"><h3>SateHaze1k</h3><div class="table-scroll" role="region" tabindex="0" aria-label="SateHaze1k results"><table><thead><tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">Thin</th><th scope="colgroup" colspan="2">Moderate</th><th scope="colgroup" colspan="2">Thick</th></tr><tr><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th></tr></thead><tbody><tr><th scope="row">AOD-Net</th><td>19.54</td><td>0.854</td><td>20.10</td><td>0.885</td><td>15.92</td><td>0.731</td></tr><tr><th scope="row">H2RL-Net</th><td>20.91</td><td>0.880</td><td>22.34</td><td>0.906</td><td>17.41</td><td>0.768</td></tr><tr><th scope="row">FCFT-Net</th><td>23.59</td><td>0.913</td><td>22.88</td><td>0.927</td><td>20.03</td><td>0.816</td></tr><tr><th scope="row">C2PNet</th><td>19.62</td><td>0.880</td><td>24.79</td><td>0.940</td><td>16.83</td><td>0.790</td></tr><tr><th scope="row">Restormer</th><td>23.08</td><td>0.912</td><td>24.73</td><td>0.933</td><td>18.58</td><td>0.762</td></tr><tr><th scope="row">Trinity-Net</th><td>21.55</td><td>0.884</td><td>23.35</td><td>0.895</td><td>20.97</td><td>0.823</td></tr><tr><th scope="row">UMWTransformer</th><td>24.29</td><td>0.919</td><td>26.65</td><td>0.946</td><td>20.07</td><td>0.825</td></tr><tr><th scope="row">FocalNet</th><td>24.16</td><td>0.916</td><td>25.99</td><td>0.947</td><td>21.69</td><td>0.847</td></tr><tr><th scope="row">ConvIR-S</th><td>25.11</td><td>0.978</td><td>26.79</td><td>0.978</td><td>22.65</td><td>0.950</td></tr><tr><th scope="row">PoolNet-S</th><td>25.02</td><td>0.979</td><td>27.02</td><td>0.979</td><td>22.73</td><td class="best">0.955</td></tr><tr class="ours"><th scope="row">ConvIR + UDP</th><td>25.48</td><td>0.979</td><td>28.07</td><td class="best">0.981</td><td>22.95</td><td>0.953</td></tr><tr class="ours"><th scope="row">PoolNet + UDP</th><td class="best">26.20</td><td class="best">0.980</td><td class="best">28.26</td><td>0.979</td><td class="best">23.13</td><td>0.951</td></tr></tbody></table></div><p class="scroll-hint">Scroll to explore the table · UDP variants shaded in blue</p></div></div>
+          <!-- END TABLE:remote-sensing -->
+          <figure><button class="figure-zoom" aria-label="Enlarge the remote-sensing comparison"><img src="assets/teaser-remote-sensing.webp" width="2724" height="735" alt="Remote-sensing dehazing comparison: input, competing method, UDPNet and ground truth" loading="lazy"></button><figcaption>Restoring structures in a remote-sensing scene.</figcaption></figure>
+        </div>
+
+        <div id="all-in-one" class="result-panel" role="tabpanel" aria-labelledby="all-in-one-tab" tabindex="0" hidden>
+          <p class="result-intro">A single model handles dehazing, deraining, denoising, motion deblurring, and low-light enhancement. AdaIR + UDP achieves an average of <strong>30.55 dB / 0.915 SSIM</strong>.</p>
+          <!-- TABLE:all-in-one -->
+<div class="table-grid single"><div class="table-card"><h3>Five-task image restoration</h3><div class="table-scroll" role="region" tabindex="0" aria-label="Five-task image restoration results"><table><thead><tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="2">SOTS</th><th scope="colgroup" colspan="2">Rain100L</th><th scope="colgroup" colspan="2">BSD68 (σ = 25)</th><th scope="colgroup" colspan="2">GoPro</th><th scope="colgroup" colspan="2">LOL</th><th scope="colgroup" colspan="2">Average</th></tr><tr><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th></tr></thead><tbody><tr><th scope="row">DehazeFormer</th><td>25.31</td><td>0.937</td><td>33.68</td><td>0.954</td><td>30.89</td><td>0.880</td><td>25.93</td><td>0.785</td><td>21.31</td><td>0.819</td><td>27.42</td><td>0.875</td></tr><tr><th scope="row">Retinexformer</th><td>24.81</td><td>0.933</td><td>32.68</td><td>0.940</td><td>30.84</td><td>0.880</td><td>25.09</td><td>0.779</td><td>22.76</td><td class="best">0.863</td><td>27.24</td><td>0.873</td></tr><tr><th scope="row">SwinIR</th><td>21.50</td><td>0.891</td><td>30.78</td><td>0.923</td><td>30.59</td><td>0.868</td><td>24.52</td><td>0.773</td><td>17.81</td><td>0.723</td><td>25.04</td><td>0.835</td></tr><tr><th scope="row">Restormer</th><td>24.09</td><td>0.927</td><td>34.81</td><td>0.960</td><td class="best">31.49</td><td>0.884</td><td>27.22</td><td>0.829</td><td>20.41</td><td>0.806</td><td>27.60</td><td>0.881</td></tr><tr><th scope="row">FSNet</th><td>25.53</td><td>0.943</td><td>36.07</td><td>0.968</td><td>31.33</td><td>0.883</td><td>28.32</td><td>0.869</td><td>22.29</td><td>0.829</td><td>28.71</td><td>0.898</td></tr><tr><th scope="row">AirNet</th><td>21.04</td><td>0.884</td><td>32.98</td><td>0.951</td><td>30.91</td><td>0.882</td><td>24.35</td><td>0.781</td><td>18.18</td><td>0.735</td><td>25.49</td><td>0.846</td></tr><tr><th scope="row">PromptIR</th><td>26.54</td><td>0.949</td><td>36.37</td><td>0.970</td><td>31.47</td><td>0.886</td><td>28.71</td><td>0.881</td><td>22.68</td><td>0.832</td><td>29.15</td><td>0.904</td></tr><tr><th scope="row">AdaIR</th><td>30.53</td><td>0.978</td><td>38.02</td><td>0.981</td><td>31.35</td><td>0.889</td><td>28.12</td><td>0.858</td><td>23.00</td><td>0.845</td><td>30.20</td><td>0.910</td></tr><tr><th scope="row">DCPT (PromptIR)</th><td>30.72</td><td>0.977</td><td>37.32</td><td>0.978</td><td>31.32</td><td>0.885</td><td>28.84</td><td>0.877</td><td>23.35</td><td>0.840</td><td>30.31</td><td>0.911</td></tr><tr><th scope="row">DA-RCOT</th><td>30.96</td><td>0.975</td><td>37.87</td><td>0.980</td><td>31.23</td><td>0.888</td><td>28.68</td><td>0.872</td><td>23.25</td><td>0.836</td><td>30.40</td><td>0.911</td></tr><tr><th scope="row">Perceive-IR</th><td>28.19</td><td>0.964</td><td>37.25</td><td>0.977</td><td>31.44</td><td>0.887</td><td class="best">29.46</td><td class="best">0.886</td><td>22.88</td><td>0.833</td><td>29.84</td><td>0.909</td></tr><tr><th scope="row">Pool-AIO</th><td>30.25</td><td>0.977</td><td>37.85</td><td>0.981</td><td>31.24</td><td>0.887</td><td>27.66</td><td>0.844</td><td>22.66</td><td>0.841</td><td>29.93</td><td>0.906</td></tr><tr><th scope="row">DPPD (PromptIR)</th><td>30.31</td><td class="best">0.980</td><td>37.32</td><td>0.980</td><td>31.33</td><td>0.885</td><td>28.74</td><td>0.875</td><td>22.73</td><td>0.846</td><td>30.09</td><td>0.913</td></tr><tr><th scope="row">VLU-Net</th><td>30.84</td><td class="best">0.980</td><td class="best">38.54</td><td class="best">0.982</td><td>31.43</td><td class="best">0.891</td><td>27.46</td><td>0.840</td><td>22.29</td><td>0.833</td><td>30.11</td><td>0.905</td></tr><tr class="ours"><th scope="row">PromptIR + UDP</th><td>31.33</td><td class="best">0.980</td><td>37.63</td><td>0.980</td><td>31.25</td><td>0.883</td><td>28.34</td><td>0.868</td><td>23.18</td><td>0.851</td><td>30.35</td><td>0.912</td></tr><tr class="ours"><th scope="row">AdaIR + UDP</th><td class="best">31.41</td><td class="best">0.980</td><td>37.85</td><td>0.980</td><td>31.28</td><td>0.888</td><td>28.62</td><td>0.870</td><td class="best">23.53</td><td>0.854</td><td class="best">30.55</td><td class="best">0.915</td></tr></tbody></table></div><p class="scroll-hint">Scroll to explore the table · UDP variants shaded in blue</p></div></div>
+          <!-- END TABLE:all-in-one -->
+          <figure class="compact-figure"><button class="figure-zoom" aria-label="Enlarge the five-task radar comparisons"><img src="assets/five-task.webp" width="1228" height="454" alt="Radar comparisons of five-task restoration using PromptIR and AdaIR with and without UDP" loading="lazy"></button><figcaption>Depth priors extend beyond dehazing to five-task image restoration.</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="analysis" class="section container">
+      <h2>Understanding the Depth Prior</h2>
+      <p class="section-lead">Reliable geometry cues, adaptive fusion.</p>
+      <figure><button class="figure-zoom" aria-label="Enlarge the depth-prior reliability analysis"><img src="assets/depth-reliability.webp" width="2400" height="817" alt="Depth maps estimated from hazy and clear images, their absolute errors, and restoration results across outdoor, real-world and nighttime scenes" loading="lazy"></button><figcaption>Depth-prior reliability on SOTS-Outdoor, NH-HAZE, and NHR. Relative-depth estimates retain global layout and major boundaries under haze, while local deviations remain.</figcaption></figure>
+      <div class="text-container analysis-copy"><p>UDPNet uses depth as an adaptive structural cue. DGAM and DPFM learn how to combine it with RGB features rather than directly imposing the estimated depth on the reconstruction.</p></div>
+      <figure><button class="figure-zoom" aria-label="Enlarge the DPFM feature visualization"><img src="assets/feature-fusion.webp" width="2200" height="1132" alt="Feature maps comparing RGB features, depth features and features after fusion with DPFM" loading="lazy"></button><figcaption>Feature visualization of the Depth Prior Fusion Module.</figcaption></figure>
+      <details class="efficiency">
+        <summary>Depth estimator and inference cost</summary>
+        <p>The depth estimator is frozen but remains part of inference. On Haze4K, the FSNet restoration network grows from 13.28M to 13.60M parameters; the external DepthAnything V2 model adds its own parameters and computation. The following end-to-end measurements use an RTX 3080 Ti.</p>
+        <div class="table-scroll" role="region" aria-label="Depth estimator cost comparison" tabindex="0"><table><caption>DepthAnything V2 performance–cost trade-off on Haze4K</caption><thead><tr><th scope="col">Prior</th><th scope="col">Restoration + prior (M)</th><th scope="col">PSNR ↑</th><th scope="col">GFLOPs</th><th scope="col">Memory (GiB)</th><th scope="col">Time (ms)</th></tr></thead><tbody>
+          <tr><th scope="row">RGB baseline</th><td>13.28 + 0</td><td>34.12</td><td>107.59</td><td>0.37</td><td>71.58</td></tr>
+          <tr><th scope="row">DA2-Small</th><td>13.60 + 24.8</td><td>34.69</td><td>134.94</td><td>0.87</td><td>106.48</td></tr>
+          <tr><th scope="row">DA2-Base</th><td>13.60 + 97.5</td><td>34.87</td><td>166.69</td><td>1.14</td><td>106.36</td></tr>
+          <tr class="ours"><th scope="row">DA2-Large</th><td>13.60 + 335.3</td><td>35.31</td><td>277.56</td><td>2.03</td><td>135.39</td></tr>
+        </tbody></table></div>
+      </details>
+    </section>
+
+    <section id="bibtex" class="section section-tint">
+      <div class="text-container">
+        <div class="citation-heading"><h2>BibTeX</h2><button id="copy-bibtex" type="button">Copy</button></div>
+        <pre><code id="citation">@article{zuo2026udpnet,
+  title   = {UDPNet: Unleashing Depth-based Priors for Robust Image Dehazing},
+  author  = {Zuo, Zengyuan and Jiang, Junjun and Wu, Gang and Liu, Xianming},
+  journal = {arXiv preprint arXiv:2601.06909},
+  year    = {2026}
+}</code></pre>
+        <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+  <footer><p><a href="../../">Zengyuan Zuo</a> · <a href="https://github.com/Harbinzzy/UDPNet">UDPNet on GitHub</a></p><p>Page layout inspired by <a href="https://house-yuyu.github.io/Perceive-IR/">Perceive-IR</a> and <a href="https://nerfies.github.io/">Nerfies</a>.</p></footer>
+  <dialog id="figure-dialog" aria-label="Enlarged figure">
+    <div class="lightbox-toolbar"><p id="figure-caption"></p><a id="figure-original" href="assets/framework.webp" target="_blank" rel="noopener">Open image ↗</a><button id="close-figure" aria-label="Close enlarged figure">×</button></div>
+    <div class="lightbox-image"><img id="enlarged-figure" alt=""></div>
+  </dialog>
+</body>
+</html>

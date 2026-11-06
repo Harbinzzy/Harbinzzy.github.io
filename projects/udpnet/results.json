@@ -1,0 +1,1277 @@
+{
+  "daytime": [
+    {
+      "title": "SOTS",
+      "datasets": [
+        "SOTS-Indoor",
+        "SOTS-Outdoor"
+      ],
+      "metrics": [
+        "PSNR ↑",
+        "SSIM ↑"
+      ],
+      "rows": [
+        {
+          "method": "DCP",
+          "values": [
+            "16.61",
+            "0.855",
+            "19.14",
+            "0.861"
+          ],
+          "ours": false
+        },
+        {
+          "method": "FFA-Net",
+          "values": [
+            "36.39",
+            "0.989",
+            "33.57",
+            "0.984"
+          ],
+          "ours": false
+        },
+        {
+          "method": "AECR-Net",
+          "values": [
+            "37.17",
+            "0.990",
+            null,
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "DeHamer",
+          "values": [
+            "36.63",
+            "0.988",
+            "35.18",
+            "0.986"
+          ],
+          "ours": false
+        },
+        {
+          "method": "DehazeFormer-L",
+          "values": [
+            "40.05",
+            "0.996",
+            null,
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "FSNet",
+          "values": [
+            "42.45",
+            "0.997",
+            "40.40",
+            "0.997"
+          ],
+          "ours": false
+        },
+        {
+          "method": "MB-TaylorFormer-L",
+          "values": [
+            "42.64",
+            "0.994",
+            "38.09",
+            "0.991"
+          ],
+          "ours": false
+        },
+        {
+          "method": "FocalNet",
+          "values": [
+            "40.82",
+            "0.996",
+            "37.71",
+            "0.995"
+          ],
+          "ours": false
+        },
+        {
+          "method": "C2PNet",
+          "values": [
+            "42.56",
+            "0.995",
+            "36.68",
+            "0.990"
+          ],
+          "ours": false
+        },
+        {
+          "method": "DEA-Net-CR",
+          "values": [
+            "41.31",
+            "0.995",
+            "36.59",
+            "0.990"
+          ],
+          "ours": false
+        },
+        {
+          "method": "DCMPNet",
+          "values": [
+            "42.18",
+            "0.997",
+            "36.56",
+            "0.993"
+          ],
+          "ours": false
+        },
+        {
+          "method": "GridFormer",
+          "values": [
+            "42.34",
+            "0.994",
+            null,
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR-B",
+          "values": [
+            "42.72",
+            "0.997",
+            "39.42",
+            "0.996"
+          ],
+          "ours": false
+        },
+        {
+          "method": "SFMN",
+          "values": [
+            "41.44",
+            "0.995",
+            "37.72",
+            "0.991"
+          ],
+          "ours": false
+        },
+        {
+          "method": "PoolNet-B",
+          "values": [
+            "42.01",
+            "0.997",
+            null,
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "PGH2Net",
+          "values": [
+            "41.70",
+            "0.996",
+            "37.52",
+            "0.989"
+          ],
+          "ours": false
+        },
+        {
+          "method": "MB-TaylorFormerV2-L",
+          "values": [
+            "42.84",
+            "0.995",
+            "39.25",
+            "0.992"
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR + UDP",
+          "values": [
+            "43.12",
+            "0.997",
+            "40.32",
+            "0.996"
+          ],
+          "ours": true
+        },
+        {
+          "method": "FSNet + UDP",
+          "values": [
+            "43.30",
+            "0.997",
+            "40.53",
+            "0.997"
+          ],
+          "ours": true
+        }
+      ]
+    },
+    {
+      "title": "Haze4K",
+      "datasets": [
+        "Haze4K"
+      ],
+      "metrics": [
+        "PSNR ↑",
+        "SSIM ↑"
+      ],
+      "rows": [
+        {
+          "method": "DehazeNet",
+          "values": [
+            "19.12",
+            "0.84"
+          ],
+          "ours": false
+        },
+        {
+          "method": "GridDehazeNet",
+          "values": [
+            "23.29",
+            "0.93"
+          ],
+          "ours": false
+        },
+        {
+          "method": "FFA-Net",
+          "values": [
+            "26.96",
+            "0.95"
+          ],
+          "ours": false
+        },
+        {
+          "method": "DMT-Net",
+          "values": [
+            "28.53",
+            "0.96"
+          ],
+          "ours": false
+        },
+        {
+          "method": "PMNet",
+          "values": [
+            "33.49",
+            "0.98"
+          ],
+          "ours": false
+        },
+        {
+          "method": "MB-TaylorFormer-L",
+          "values": [
+            "34.47",
+            "0.99"
+          ],
+          "ours": false
+        },
+        {
+          "method": "FSNet",
+          "values": [
+            "34.12",
+            "0.99"
+          ],
+          "ours": false
+        },
+        {
+          "method": "GridFormer",
+          "values": [
+            "33.27",
+            "0.99"
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR-B",
+          "values": [
+            "34.15",
+            "0.99"
+          ],
+          "ours": false
+        },
+        {
+          "method": "DEA-Net-CR",
+          "values": [
+            "34.25",
+            "0.99"
+          ],
+          "ours": false
+        },
+        {
+          "method": "MB-TaylorFormerV2-B",
+          "values": [
+            "34.92",
+            "0.99"
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR + UDP",
+          "values": [
+            "34.82",
+            "0.99"
+          ],
+          "ours": true
+        },
+        {
+          "method": "FSNet + UDP",
+          "values": [
+            "35.31",
+            "0.99"
+          ],
+          "ours": true
+        }
+      ]
+    }
+  ],
+  "nighttime": [
+    {
+      "title": "GTA5",
+      "datasets": [
+        "GTA5"
+      ],
+      "metrics": [
+        "PSNR ↑",
+        "SSIM ↑"
+      ],
+      "rows": [
+        {
+          "method": "GS",
+          "values": [
+            "21.02",
+            "0.639"
+          ],
+          "ours": false
+        },
+        {
+          "method": "MRP",
+          "values": [
+            "20.92",
+            "0.646"
+          ],
+          "ours": false
+        },
+        {
+          "method": "Ancuti et al.",
+          "values": [
+            "20.59",
+            "0.623"
+          ],
+          "ours": false
+        },
+        {
+          "method": "Yan et al.",
+          "values": [
+            "27.00",
+            "0.850"
+          ],
+          "ours": false
+        },
+        {
+          "method": "CycleGAN",
+          "values": [
+            "21.75",
+            "0.696"
+          ],
+          "ours": false
+        },
+        {
+          "method": "Jin et al.",
+          "values": [
+            "30.38",
+            "0.904"
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR-B",
+          "values": [
+            "31.83",
+            "0.921"
+          ],
+          "ours": false
+        },
+        {
+          "method": "PoolNet-B",
+          "values": [
+            "31.53",
+            "0.921"
+          ],
+          "ours": false
+        },
+        {
+          "method": "PoolNet + UDP",
+          "values": [
+            "32.78",
+            "0.930"
+          ],
+          "ours": true
+        },
+        {
+          "method": "ConvIR + UDP",
+          "values": [
+            "33.12",
+            "0.933"
+          ],
+          "ours": true
+        }
+      ]
+    },
+    {
+      "title": "NHR",
+      "datasets": [
+        "NHR"
+      ],
+      "metrics": [
+        "PSNR ↑",
+        "SSIM ↑"
+      ],
+      "rows": [
+        {
+          "method": "NDIM",
+          "values": [
+            "14.31",
+            "0.526"
+          ],
+          "ours": false
+        },
+        {
+          "method": "GS",
+          "values": [
+            "17.32",
+            "0.629"
+          ],
+          "ours": false
+        },
+        {
+          "method": "MRPF",
+          "values": [
+            "16.95",
+            "0.667"
+          ],
+          "ours": false
+        },
+        {
+          "method": "MRP",
+          "values": [
+            "19.93",
+            "0.777"
+          ],
+          "ours": false
+        },
+        {
+          "method": "OSFD",
+          "values": [
+            "21.32",
+            "0.804"
+          ],
+          "ours": false
+        },
+        {
+          "method": "HCD",
+          "values": [
+            "23.43",
+            "0.953"
+          ],
+          "ours": false
+        },
+        {
+          "method": "FocalNet",
+          "values": [
+            "25.35",
+            "0.969"
+          ],
+          "ours": false
+        },
+        {
+          "method": "Jin et al.",
+          "values": [
+            "26.56",
+            "0.890"
+          ],
+          "ours": false
+        },
+        {
+          "method": "FSNet",
+          "values": [
+            "26.30",
+            "0.976"
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR-B",
+          "values": [
+            "29.49",
+            "0.983"
+          ],
+          "ours": false
+        },
+        {
+          "method": "PoolNet-B",
+          "values": [
+            "28.28",
+            "0.980"
+          ],
+          "ours": false
+        },
+        {
+          "method": "FSNet + UDP",
+          "values": [
+            "28.09",
+            "0.980"
+          ],
+          "ours": true
+        },
+        {
+          "method": "ConvIR + UDP",
+          "values": [
+            "29.54",
+            "0.983"
+          ],
+          "ours": true
+        }
+      ]
+    }
+  ],
+  "real-world": [
+    {
+      "title": "Dense-Haze and NH-HAZE",
+      "datasets": [
+        "Dense-Haze",
+        "NH-HAZE"
+      ],
+      "metrics": [
+        "PSNR ↑",
+        "SSIM ↑",
+        "LPIPS ↓"
+      ],
+      "rows": [
+        {
+          "method": "DehazeNet",
+          "values": [
+            "13.84",
+            "0.43",
+            null,
+            "16.62",
+            "0.52",
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "MSBDN",
+          "values": [
+            "15.37",
+            "0.49",
+            null,
+            "19.23",
+            "0.71",
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "DeHamer",
+          "values": [
+            "16.62",
+            "0.56",
+            "0.6346",
+            "20.66",
+            "0.68",
+            "0.3837"
+          ],
+          "ours": false
+        },
+        {
+          "method": "PMNet",
+          "values": [
+            "16.79",
+            "0.51",
+            null,
+            "20.42",
+            "0.73",
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "MB-TaylorFormer-B",
+          "values": [
+            "16.66",
+            "0.56",
+            "0.6125",
+            null,
+            null,
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "C2PNet",
+          "values": [
+            "16.88",
+            "0.57",
+            null,
+            "20.24",
+            "0.69",
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "FocalNet",
+          "values": [
+            "17.07",
+            "0.63",
+            "0.6087",
+            "20.43",
+            "0.79",
+            "0.3780"
+          ],
+          "ours": false
+        },
+        {
+          "method": "SFNet",
+          "values": [
+            "17.46",
+            "0.58",
+            "0.5689",
+            "20.46",
+            "0.80",
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "FSNet",
+          "values": [
+            "17.13",
+            "0.65",
+            "0.5756",
+            "20.55",
+            "0.81",
+            "0.3624"
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR-S",
+          "values": [
+            "17.45",
+            "0.65",
+            "0.6000",
+            "20.65",
+            "0.80",
+            "0.3669"
+          ],
+          "ours": false
+        },
+        {
+          "method": "PGH2Net",
+          "values": [
+            "17.02",
+            "0.61",
+            null,
+            null,
+            null,
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "MB-TaylorFormerV2-B",
+          "values": [
+            "16.95",
+            "0.62",
+            null,
+            "20.73",
+            "0.70",
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR + UDP",
+          "values": [
+            "17.55",
+            "0.67",
+            "0.5813",
+            "20.98",
+            "0.82",
+            "0.3567"
+          ],
+          "ours": true
+        },
+        {
+          "method": "FSNet + UDP",
+          "values": [
+            "17.85",
+            "0.65",
+            "0.6033",
+            "20.94",
+            "0.82",
+            "0.3732"
+          ],
+          "ours": true
+        }
+      ]
+    },
+    {
+      "title": "O-HAZE and I-HAZE",
+      "datasets": [
+        "O-HAZE",
+        "I-HAZE"
+      ],
+      "metrics": [
+        "PSNR ↑",
+        "SSIM ↑"
+      ],
+      "rows": [
+        {
+          "method": "GridDehazeNet",
+          "values": [
+            "18.92",
+            "0.67",
+            "18.73",
+            "0.77"
+          ],
+          "ours": false
+        },
+        {
+          "method": "MSBDN",
+          "values": [
+            "24.36",
+            "0.75",
+            "19.62",
+            "0.62"
+          ],
+          "ours": false
+        },
+        {
+          "method": "FFA-Net",
+          "values": [
+            "22.12",
+            "0.77",
+            "19.72",
+            "0.73"
+          ],
+          "ours": false
+        },
+        {
+          "method": "DeHamer",
+          "values": [
+            "25.11",
+            "0.78",
+            null,
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "MB-TaylorFormer-B",
+          "values": [
+            "25.05",
+            "0.79",
+            null,
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "MB-TaylorFormer-L",
+          "values": [
+            "25.31",
+            "0.78",
+            null,
+            null
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR",
+          "values": [
+            "25.36",
+            "0.78",
+            "22.44",
+            "0.89"
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR + UDP",
+          "values": [
+            "25.66",
+            "0.79",
+            "22.80",
+            "0.89"
+          ],
+          "ours": true
+        }
+      ]
+    }
+  ],
+  "remote-sensing": [
+    {
+      "title": "SateHaze1k",
+      "datasets": [
+        "Thin",
+        "Moderate",
+        "Thick"
+      ],
+      "metrics": [
+        "PSNR ↑",
+        "SSIM ↑"
+      ],
+      "rows": [
+        {
+          "method": "AOD-Net",
+          "values": [
+            "19.54",
+            "0.854",
+            "20.10",
+            "0.885",
+            "15.92",
+            "0.731"
+          ],
+          "ours": false
+        },
+        {
+          "method": "H2RL-Net",
+          "values": [
+            "20.91",
+            "0.880",
+            "22.34",
+            "0.906",
+            "17.41",
+            "0.768"
+          ],
+          "ours": false
+        },
+        {
+          "method": "FCFT-Net",
+          "values": [
+            "23.59",
+            "0.913",
+            "22.88",
+            "0.927",
+            "20.03",
+            "0.816"
+          ],
+          "ours": false
+        },
+        {
+          "method": "C2PNet",
+          "values": [
+            "19.62",
+            "0.880",
+            "24.79",
+            "0.940",
+            "16.83",
+            "0.790"
+          ],
+          "ours": false
+        },
+        {
+          "method": "Restormer",
+          "values": [
+            "23.08",
+            "0.912",
+            "24.73",
+            "0.933",
+            "18.58",
+            "0.762"
+          ],
+          "ours": false
+        },
+        {
+          "method": "Trinity-Net",
+          "values": [
+            "21.55",
+            "0.884",
+            "23.35",
+            "0.895",
+            "20.97",
+            "0.823"
+          ],
+          "ours": false
+        },
+        {
+          "method": "UMWTransformer",
+          "values": [
+            "24.29",
+            "0.919",
+            "26.65",
+            "0.946",
+            "20.07",
+            "0.825"
+          ],
+          "ours": false
+        },
+        {
+          "method": "FocalNet",
+          "values": [
+            "24.16",
+            "0.916",
+            "25.99",
+            "0.947",
+            "21.69",
+            "0.847"
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR-S",
+          "values": [
+            "25.11",
+            "0.978",
+            "26.79",
+            "0.978",
+            "22.65",
+            "0.950"
+          ],
+          "ours": false
+        },
+        {
+          "method": "PoolNet-S",
+          "values": [
+            "25.02",
+            "0.979",
+            "27.02",
+            "0.979",
+            "22.73",
+            "0.955"
+          ],
+          "ours": false
+        },
+        {
+          "method": "ConvIR + UDP",
+          "values": [
+            "25.48",
+            "0.979",
+            "28.07",
+            "0.981",
+            "22.95",
+            "0.953"
+          ],
+          "ours": true
+        },
+        {
+          "method": "PoolNet + UDP",
+          "values": [
+            "26.20",
+            "0.980",
+            "28.26",
+            "0.979",
+            "23.13",
+            "0.951"
+          ],
+          "ours": true
+        }
+      ]
+    }
+  ],
+  "all-in-one": [
+    {
+      "title": "Five-task image restoration",
+      "datasets": [
+        "SOTS",
+        "Rain100L",
+        "BSD68 (σ = 25)",
+        "GoPro",
+        "LOL",
+        "Average"
+      ],
+      "metrics": [
+        "PSNR ↑",
+        "SSIM ↑"
+      ],
+      "rows": [
+        {
+          "method": "DehazeFormer",
+          "values": [
+            "25.31",
+            "0.937",
+            "33.68",
+            "0.954",
+            "30.89",
+            "0.880",
+            "25.93",
+            "0.785",
+            "21.31",
+            "0.819",
+            "27.42",
+            "0.875"
+          ],
+          "ours": false
+        },
+        {
+          "method": "Retinexformer",
+          "values": [
+            "24.81",
+            "0.933",
+            "32.68",
+            "0.940",
+            "30.84",
+            "0.880",
+            "25.09",
+            "0.779",
+            "22.76",
+            "0.863",
+            "27.24",
+            "0.873"
+          ],
+          "ours": false
+        },
+        {
+          "method": "SwinIR",
+          "values": [
+            "21.50",
+            "0.891",
+            "30.78",
+            "0.923",
+            "30.59",
+            "0.868",
+            "24.52",
+            "0.773",
+            "17.81",
+            "0.723",
+            "25.04",
+            "0.835"
+          ],
+          "ours": false
+        },
+        {
+          "method": "Restormer",
+          "values": [
+            "24.09",
+            "0.927",
+            "34.81",
+            "0.960",
+            "31.49",
+            "0.884",
+            "27.22",
+            "0.829",
+            "20.41",
+            "0.806",
+            "27.60",
+            "0.881"
+          ],
+          "ours": false
+        },
+        {
+          "method": "FSNet",
+          "values": [
+            "25.53",
+            "0.943",
+            "36.07",
+            "0.968",
+            "31.33",
+            "0.883",
+            "28.32",
+            "0.869",
+            "22.29",
+            "0.829",
+            "28.71",
+            "0.898"
+          ],
+          "ours": false
+        },
+        {
+          "method": "AirNet",
+          "values": [
+            "21.04",
+            "0.884",
+            "32.98",
+            "0.951",
+            "30.91",
+            "0.882",
+            "24.35",
+            "0.781",
+            "18.18",
+            "0.735",
+            "25.49",
+            "0.846"
+          ],
+          "ours": false
+        },
+        {
+          "method": "PromptIR",
+          "values": [
+            "26.54",
+            "0.949",
+            "36.37",
+            "0.970",
+            "31.47",
+            "0.886",
+            "28.71",
+            "0.881",
+            "22.68",
+            "0.832",
+            "29.15",
+            "0.904"
+          ],
+          "ours": false
+        },
+        {
+          "method": "AdaIR",
+          "values": [
+            "30.53",
+            "0.978",
+            "38.02",
+            "0.981",
+            "31.35",
+            "0.889",
+            "28.12",
+            "0.858",
+            "23.00",
+            "0.845",
+            "30.20",
+            "0.910"
+          ],
+          "ours": false
+        },
+        {
+          "method": "DCPT (PromptIR)",
+          "values": [
+            "30.72",
+            "0.977",
+            "37.32",
+            "0.978",
+            "31.32",
+            "0.885",
+            "28.84",
+            "0.877",
+            "23.35",
+            "0.840",
+            "30.31",
+            "0.911"
+          ],
+          "ours": false
+        },
+        {
+          "method": "DA-RCOT",
+          "values": [
+            "30.96",
+            "0.975",
+            "37.87",
+            "0.980",
+            "31.23",
+            "0.888",
+            "28.68",
+            "0.872",
+            "23.25",
+            "0.836",
+            "30.40",
+            "0.911"
+          ],
+          "ours": false
+        },
+        {
+          "method": "Perceive-IR",
+          "values": [
+            "28.19",
+            "0.964",
+            "37.25",
+            "0.977",
+            "31.44",
+            "0.887",
+            "29.46",
+            "0.886",
+            "22.88",
+            "0.833",
+            "29.84",
+            "0.909"
+          ],
+          "ours": false
+        },
+        {
+          "method": "Pool-AIO",
+          "values": [
+            "30.25",
+            "0.977",
+            "37.85",
+            "0.981",
+            "31.24",
+            "0.887",
+            "27.66",
+            "0.844",
+            "22.66",
+            "0.841",
+            "29.93",
+            "0.906"
+          ],
+          "ours": false
+        },
+        {
+          "method": "DPPD (PromptIR)",
+          "values": [
+            "30.31",
+            "0.980",
+            "37.32",
+            "0.980",
+            "31.33",
+            "0.885",
+            "28.74",
+            "0.875",
+            "22.73",
+            "0.846",
+            "30.09",
+            "0.913"
+          ],
+          "ours": false
+        },
+        {
+          "method": "VLU-Net",
+          "values": [
+            "30.84",
+            "0.980",
+            "38.54",
+            "0.982",
+            "31.43",
+            "0.891",
+            "27.46",
+            "0.840",
+            "22.29",
+            "0.833",
+            "30.11",
+            "0.905"
+          ],
+          "ours": false
+        },
+        {
+          "method": "PromptIR + UDP",
+          "values": [
+            "31.33",
+            "0.980",
+            "37.63",
+            "0.980",
+            "31.25",
+            "0.883",
+            "28.34",
+            "0.868",
+            "23.18",
+            "0.851",
+            "30.35",
+            "0.912"
+          ],
+          "ours": true
+        },
+        {
+          "method": "AdaIR + UDP",
+          "values": [
+            "31.41",
+            "0.980",
+            "37.85",
+            "0.980",
+            "31.28",
+            "0.888",
+            "28.62",
+            "0.870",
+            "23.53",
+            "0.854",
+            "30.55",
+            "0.915"
+          ],
+          "ours": true
+        }
+      ]
+    }
+  ]
+}
