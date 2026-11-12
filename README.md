@@ -5,7 +5,7 @@ Personal academic homepage: <https://harbinzzy.github.io/>.
 
 - `index.html`: biography and academic advisor, profile contact details, news, selected publications (including MARS), research experience, and professional activities.
 - `assets/homepage.css`: responsive academic homepage styles, inspired by [Shuai Tan's homepage](https://tanshuai0219.github.io/).
-- `assets/home/`: author portrait from [arXiv:2410.15067v2](https://arxiv.org/html/2410.15067v2), survey taxonomy (Fig. 1) from the latest [arXiv:2410.15067v3](https://arxiv.org/html/2410.15067v3) (revised August 12, 2025; checked October 11, 2026), and the UDPNet figure from the author's public research repository.
+- `assets/home/`: author-provided portrait (updated November 12, 2026; cropped to 600 × 736 for the homepage), survey taxonomy (Fig. 1) from the latest [arXiv:2410.15067v3](https://arxiv.org/html/2410.15067v3) (revised August 12, 2025; checked October 11, 2026), and the UDPNet figure from the author's public research repository.
 - `assets/home/pku.png`: Peking University seal from the university's [official identification system](https://www.pku.edu.cn/detail/1096.html).
 - `projects/mars.html` and `assets/site.css`: existing MARS project page and its independent styles.
 - `projects/udpnet/index.html`: UDPNet project page, with scene tabs, five evaluation scenarios, quantitative tables, zoomable manuscript figures, depth-prior analysis, and BibTeX. Figures and results follow the author-provided latest manuscript; the Paper button links to the public arXiv PDF. The page is static, with no build step or runtime data dependency; `results.json` is a machine-readable copy of the tables.
